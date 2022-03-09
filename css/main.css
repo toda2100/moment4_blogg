@@ -1,0 +1,281 @@
+ body{                            /* Bakgrund med font */
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.6em;
+    background-color: lightgray;
+    margin: 0;
+    padding: 0; 
+}
+
+.mainheader {                           /* Lite färg och teckenfärg högst upp */
+    background-color:#f29400;
+    color: white;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    box-sizing: border-box;
+}
+
+.container {                    /* Huvuddelar innehåll, max och minbredd */
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    background-color: white;
+    min-width: 300px;
+}
+
+.checkbox {
+    width: 5%;
+}
+
+.check {
+    font-size: 0.8em;
+}
+
+
+.leftcontent {              /* Innehåll till vänster i desktop, med avdelare */
+    width: 68%;
+    float: left;
+    padding: 3% 5% 3%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-color: #f29400;
+    border-width: 2px;
+}
+
+article {               /*artikelomslutning etc */
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: lightgrey;
+    margin-bottom: 1%;
+}
+
+.sidebar {              /* Innehåll till höger i desktop och nedtill i mq´s */
+    width:32%;
+    box-sizing: border-box;
+    padding: 3% 5% 3%;
+    float: left;
+    line-height: 1.75em;
+}    
+
+.sidebar ol {                   /* Sidebar olika delar */
+    list-style: none;
+    line-height: 2em;
+}
+
+.sidebar ol li a {          /* Sidebar olika delar */
+    color: black;
+    text-decoration: none;
+}
+
+.sidebar .current {             /* PHP hämtar när vi står på en viss sida - i sidebar */
+    color:#f29400;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+#list {
+    list-style: none;
+    line-height: 2em;
+    margin-bottom: 2em;
+    padding: 1%;
+}
+
+.listan {
+    padding-inline-start: 1%;
+}
+
+textarea {
+    width: 96%;
+    height: 200px;
+    padding: 2%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.mainfooter {               /* utseende footer */
+    width: 100%;
+    clear: both;
+    padding: 5%;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    background-color: #f29400;
+}
+
+.mainfooter a {
+    color: white;
+}
+
+.mainfooter a:hover {
+    text-decoration-color: #ac3954;
+}
+
+header nav ul {   /* huvudmeny i desktop */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul li a {
+    display: inline-block;
+    padding: 6px 14px 6px 14px;  
+    background-color: #3a54ac;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+header nav ul li a:hover{
+    background-color:#ac3954;
+}
+
+.listan li a {
+    text-decoration: none;
+    padding: 1% 2% 1% 2%;
+    margin-top: 1%;
+    width: 20%; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 0.7em;
+    background-color: #3a54ac;
+    cursor: pointer;
+    border-style: solid;
+    border-radius: 3px; 
+}
+
+.listan li a:hover{
+    background-color:#ac3954;
+}
+
+.formsarea {                    /* utseende formulär */
+box-sizing: border-box;
+margin-bottom: 4%;
+}
+
+form {              /* utseende formulär */
+width: 100%;
+box-sizing: border-box;
+
+}
+
+.area {                 /* utseende formulär hela */
+padding: 2%;
+margin-bottom: 1%;
+}
+
+input {
+   width: 50%; 
+}
+
+.btn {                  /* utseende knapp formulär */
+    padding: 2%;
+    margin-top: 1%;
+    width: 55%; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-color: #3a54ac;
+    cursor: pointer;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    background-color: #ac3954;
+}
+
+.todolist {
+    text-decoration: none;
+    list-style: none;
+}
+
+.logout {
+display: inline-block;
+padding: 6px 14px 6px 14px;  
+background-color: #3a54ac;
+color: white;
+text-decoration: none;
+border-radius: 3px;
+cursor: pointer;
+}
+
+@media screen and (max-width: 834px) {   /* justering av huvudinnehåll surfplattor */
+    .sidebar {                      /* flytta ner sidebar */
+    float: none;
+    display:inline-block;
+    width: 100%;
+    margin: auto 0;
+    padding-right: 6%;
+    padding-left: 6%;
+    }
+        
+    .leftcontent {    
+    width: 100%;
+    margin: auto;
+    border-style: none;
+    padding-right: 6%;
+    padding-left: 6%;
+    }
+ 
+    input {
+    width: 65%; 
+    }
+
+    .btn {
+    width: 70%; 
+    }
+
+    .sidebar i {     /* ej visa ikoner, utan vissa annan element för listan  */
+    display: none;
+    }
+
+    .sidebar ol {
+        list-style: disclosure-closed;
+        line-height: 2em;
+        color: darkslategrey;
+    }
+
+
+}
+
+@media screen and (max-width: 667px) {   /* justering av huvudinnehåll mobil */
+    
+    input {    /* snygga till formulär*/
+    width: 95%; 
+    margin: auto;
+    }
+     
+    .btn {          /* snygga till formulär*/
+    width: 100%; 
+    margin: auto;    
+    }
+
+    .h3 {   /* snygga till avstånd vissa rubriker*/
+    margin-top: 1.6em;
+    margin-bottom:-0.5em;
+    }
+
+.mainfooter {
+    font-size: 0.8em;
+}
+
+header nav ul li a {    /* justering av menyn */
+    margin: 3%;
+    padding: 5px 10px 5px 10px;
+    white-space: nowrap;
+}
+
+}
+
