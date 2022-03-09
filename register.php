@@ -57,3 +57,8 @@ if (isset($message)) {
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
+
+
+
+
+<!-- string password_hash (string $password, int $algo [, array $options]) -->

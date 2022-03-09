@@ -25,7 +25,9 @@ class Users
         $password = $this->db->real_escape_string($password);
         $name = $this->db->real_escape_string($name);
 
-        $sql = "INSERT INTO users(username, password, name)VALUES('$username', '$password', '$name')"; //sql för att skicka in i databas
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users(username, password, name)VALUES('$username', '$hashed_password', '$name');"; //sql för att skicka in i databas
 
         $result = $this->db->query($sql);                //skicka frågan 
         return $result;
@@ -37,12 +39,21 @@ class Users
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
 
-        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $sql = "SELECT * FROM users WHERE username='$username';";
         $result = $this->db->query($sql);
 
         if ($result->num_rows > 0) {  //får vi någon respons så starta session
-            $_SESSION['username'] = $username;
-            return true;
+
+            $row = $result->fetch_assoc();
+            $stored_password = $row['password'];
+
+            if (password_verify($password, $stored_password)) {
+
+                $_SESSION['username'] = $username;
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
@@ -53,7 +64,7 @@ class Users
     {
         $username = $this->db->real_escape_string($username);
 
-        $sql = "SELECT usernam FROM users WHERE username= '$username'";
+        $sql = "SELECT username FROM users WHERE username= '$username';";
 
         $result = $this->db->query($sql);
 
