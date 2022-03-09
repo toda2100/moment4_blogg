@@ -5,7 +5,7 @@
 
 <?php
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php?message=Du måste logga in för att göra ändringar!");   //inleds med att se om inloggad, för det krävs för admin 
+    header("Location: login.php?message=Du måste logga in eller skapa användarkonto först!");   //inleds med att se om inloggad, för det krävs för admin 
 }
 ?>
 

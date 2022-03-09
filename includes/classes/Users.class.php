@@ -1,12 +1,13 @@
 <?php
 //för inloggningen och nya användare. Tobias Dahlberg 2022. 
 
-class Users {  //starttagg
+class Users
+{  //starttagg
     //properties
     private $db;
     private $username;
     private $password;
-    public  $name;   
+    public  $name;
 
     function __construct()   //construct. 
     {
@@ -17,33 +18,54 @@ class Users {  //starttagg
         }
     }
 
-// ny användare
+    // ny användare
+    public function registerUser($username, $password, $name)
+    {
+        $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
+        $password = $this->db->real_escape_string($password);
+        $name = $this->db->real_escape_string($name);
+
+        $sql = "INSERT INTO users(username, password, name)VALUES('$username', '$password', '$name')"; //sql för att skicka in i databas
+
+        $result = $this->db->query($sql);                //skicka frågan 
+        return $result;
+    }
+
+    // logga in användare som finns 
+    function login($username, $password)
+    {
+        $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
+        $password = $this->db->real_escape_string($password);
+
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {  //får vi någon respons så starta session
+            $_SESSION['username'] = $username;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //kolla om användarnamnet finns 
+    public function usernameExists($username)
+    {
+        $username = $this->db->real_escape_string($username);
+
+        $sql = "SELECT usernam FROM users WHERE username= '$username'";
+
+        $result = $this->db->query($sql);
+
+        if ($result->num_rows > 0) {  //får vi någon respons så finns användarnamnet 
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
+    // get och set för user/pass och name. kanske id är namn? och då köra namnet finns. skilja på bloggare? 
 
-// logga in användare som finns 
-
-
-
-// kolla om användarnamn finns 
-
-
-
-// get och set för user/pass och name. 
-
-
-
-function loginUser($username, $password) {   
-    if($username == "skribent" && $password == "letmein1") {
-        $_SESSION['username'] = $username;
-        return true;
-    } else {
-        return false;
-    } 
-} 
 
 } //sluttagg
-
-
-
-?>

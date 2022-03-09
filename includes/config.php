@@ -6,6 +6,10 @@
     
 session_start(); //starta session
 
+// if (session_status() == PHP_SESSION_NONE) {
+//    session_start();
+// }
+
 spl_autoload_register(function($class_name) {   //autoinkl klasser via argument class_name-->
     include "classes/" . $class_name . ".class.php";
 });

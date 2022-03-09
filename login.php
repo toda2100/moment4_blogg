@@ -7,8 +7,9 @@
     $username = $_POST ['username'];
     $password = $_POST ['password'];
 
-if($username == "skribent" && $password == "letmein1") {  //hårdkodad, annars till databas går också, med olika typer av inloggade osv. 
-    $_SESSION['username'] = $username;
+$users = new Users();
+
+if($users->login($username, $password)) {   
     header("Location: admin.php");
 }         else {
     $message = "Felaktigt användarnamn eller lösenord";
@@ -34,11 +35,11 @@ if(isset($message)) {
 <article class="formsarea">
     <!-- formulär för input av namn och lösen -->
     <form method="post" action="login.php">
-        <label for="username">Namn</label><br>
+        <label for="username">Användarnamn</label><br>
         <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!"><br>
         <label for="password">Lösenord</label><br>
         <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!"><br>
-        <button class="btn" type="submit">Skicka</button>
+        <button class="btn" type="submit">Logga in</button>
     </form>
 </article>
 
