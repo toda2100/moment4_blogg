@@ -75,12 +75,49 @@ class Users
         }
     }
 
-    // get och set för user/pass och name. kanske id är namn? och då köra namnet finns. skilja på bloggare? 
+    // set för user/pass och name. MÅSTE ÄVEN GÖRAS KONTROLLER VID INSKRIVNING AV DETTA ! hasning och tvätta från html?
+    function setUsername (string $username) : bool {
+
+        if(strlen($username) > 4) {//innehåller tecken
+        $this->username = $username;
+        return true;
+    }
+        return false;
+    }
+
+    function setPassword (string $password) : bool {
+
+        if(strlen($password) > 4) {//innehåller tecken
+        $this->password = $password;
+        return true;
+    }
+        return false;
+    }
     
+    function setName (string $name) : bool {
 
-    //get name kanske med mer från DB? 
+        if(strlen($name) > 4) {//innehåller tecken
+        $this->name= $name;
+        return true;
+    }
+        return false;
+    }
 
 
+
+     //kolla sets
+     // if (!$this->setUsername($username)) return false;
+     // if (!$this->setPassword($password)) return false;
+     // if (!$this->setName($name)) return false;
+    //get name kanske med mer från DB? kanske id är namn? och då köra namnet finns. skilja på bloggare? 
+
+  /*   public function getNameById(int $id): array
+    {
+        $id = intval($id);
+        $sql = "SELECT * FROM articles WHERE id=$id;";
+        $data = mysqli_query($this->db, $sql);
+        return $data->fetch_assoc();
+    } */
 
 //destruct
 function __destruct()

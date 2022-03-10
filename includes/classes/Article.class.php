@@ -106,3 +106,8 @@ class Article
         mysqli_close($this->db);
     }
 } //slut
+
+
+
+// SQL-frågan bli liknande ”GET * FROM users WHERE username = username”. Eller user_id om du hellre kör på det.
+// Ska du skapa ett inlägg så har du ju då inloggad användare i en Sessions-variabel du kan skicka med till databasen.

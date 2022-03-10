@@ -23,7 +23,7 @@
 </footer><!-- /mainfooter -->
 </div><!-- /container -->
 
-<script src="js/main.js"></script>
+<!-- <script src="js/main.js"></script> körs bara på registersidan för att undvika felmeddelanden. -->  
 </body>
 
 </html>

@@ -15,6 +15,7 @@ CREATE TABLE articles(
 id INT(11) PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR (128) NOT NULL,
 content TEXT NOT NULL,
+iduser INT(11), 
 postade TIMESTAMP NOT NULL DEFAULT current_timestamp()
 );
 ";
@@ -28,7 +29,7 @@ name VARCHAR (128) NOT NULL
 );
 ";
 
-// $sql .= "CONSTRAINT FK_name FOREIGN KEY (users) REFERENCES name(users)";
+//$sql .= "ALTER TABLE ARTICLES ADD CONSTRAINT ID_ARTICLES_FK FOREIGN KEY (IDUSER) REFERENCES USERS (ID);";
 
 echo "<pre>$sql</pre>";                     
 

@@ -14,6 +14,9 @@ if (isset($_POST['username'])) {
     if ($users->usernameExists($username)) {
         $message = "<p class='error'>Användarnamn finns redan</p>";
     } else {
+
+//set? x 3 username, password, name. 
+
         if ($users->registerUser($username, $password, $name)) {
             $message = "<p class='correct'>Användare tillagd!</p>";
         } else {
@@ -57,6 +60,8 @@ if (isset($message)) {
 
     </form>
 </article>
+
+<script src="js/main.js"></script>  
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
