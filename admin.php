@@ -30,7 +30,7 @@ if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta
 }
 
 // innehållet vid laddning, tomt. 
-$titel = "";
+$title = "";
 $content = "";
 
 if (isset($_POST['title'])) {                       //hämta från inputfält 
@@ -86,9 +86,10 @@ foreach ($article_list as $a) {                 //rulla igenom hela array skriv 
 
     <article>
         <h3><?= $a['title']; ?></h3>           
-        <p><a href="admin.php?deleteid=<?= $a['id']; ?>">Radera artikel</a></p>
+        <p><a href="admin.php?deleteid=<?= $a['id']; ?>">Radera inlägg</a></p>
+        <p><a href="edit.php?id=<?= $a['id']; ?>">Ändra inlägg</a></p>
         <p><?= substr($a['content'], 0, 150); ?>...</p>
-        <p><a href="article.php?id=<?= $a['id']; ?>">Se hela artikeln</a></p>
+        <p><a href="article.php?id=<?= $a['id']; ?>">Se hela inlägget</a></p>
     </article>
 <?php
 }

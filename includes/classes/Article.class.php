@@ -35,6 +35,18 @@ class Article
         return mysqli_query($this->db, $sql);
     }
 
+//uppdatera article
+
+    public function updateArticle(int $id, string $title, string $content): bool {
+        if (!$this->setTitle($title)) return false;
+        if (!$this->setContent($content)) return false;
+
+        $sql = "UPDATE articles SET title='" . $this->title . "' , content= '" . $this->content . "' WHERE id=$id;";
+
+        return mysqli_query($this->db, $sql);
+    }
+
+
     //hämta en artikel för undersida exempelvis, get via Id. 
     public function getArticleById(int $id): array
     {

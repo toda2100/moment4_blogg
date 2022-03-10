@@ -75,8 +75,13 @@ class Users
         }
     }
 
-
     // get och set för user/pass och name. kanske id är namn? och då köra namnet finns. skilja på bloggare? 
+    
 
+//destruct
+function __destruct()
+{
+    mysqli_close($this->db);
+}
 
 } //sluttagg
