@@ -15,7 +15,7 @@ $article = new Article();                       //hämta artiklar.
 $article_list = $article->getArticles();
 
 if(count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
-    echo "<p>Inga artiklar är publicerade!</p>";
+    echo "<p class='error'>Inga artiklar är publicerade!</p>";
 } 
                 
 $article_list = array_slice($article_list, 0, 2);           // välj enbart de senaste i arrayen för att loopa till utskrift

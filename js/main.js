@@ -1,10 +1,7 @@
-function approve() {
-    if(document.getElementById("approve").checked) {
-        document.getElementsById("submituser").disabled = false;
-    } else {
-        document.getElementsById("submituser").disabled = true;
-    }
-
-}
+let approve = document.getElementById('approve');
+let submituser = document.getElementById('submituser');
+approve.onchange = function() {
+  submituser.disabled = !this.checked;
+};
 
 

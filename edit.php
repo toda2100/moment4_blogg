@@ -28,22 +28,22 @@ if(isset($_GET['id'])) {
     
         if (!$article->setTitle($title)) {          //funktion i klass för att sätta Titel. 
             $success = false;
-            $message .= "<p>Ange titel</p>";
+            $message .= "<p class='error'>Ange titel</p>";
         }
     
         if (!$article->setContent($content)) {           //funktion i klass för att sätta innehållet. 
             $success = false;
-            $message .=  "<p>Ange innehåll</p>";
+            $message .=  "<p class='error'>Ange innehåll</p>";
         }
     
         if ($success) {
             if ($article->updateArticle($id, $title, $content)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
-                $message .=  "<p>Ändring genomförd</p>";
+                $message .=  "<p class='correct'>Ändring genomförd</p>";
             } else {
-                $message .=  "<p>Fel vid lagring</p>";
+                $message .=  "<p class='error'>Fel vid lagring</p>";
             }
         } else {
-            $message .=  "<p>Fel vid lagring, kontrollera input</p>";
+            $message .=  "<p class='error'>Fel vid lagring, kontrollera input</p>";
         }
     }
 

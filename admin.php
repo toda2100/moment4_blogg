@@ -23,9 +23,9 @@ if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta
     $id = intval($_GET['deleteid']);
 
     if ($article->deleteArticle($id)) {
-        echo "<p>Artikel raderad</p>";
+        echo "<p class='correct'>Artikel raderad</p>";
     } else {
-        echo "<p>Fel vid radering</p>";
+        echo "<p class='error'>Fel vid radering</p>";
     }
 }
 
@@ -43,22 +43,22 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
 
     if (!$article->setTitle($title)) {          //funktion i klass för att sätta Titel. 
         $success = false;
-        echo "<p>Ange titel</p>";
+        echo "<p class='error'>Ange titel</p>";
     }
 
     if (!$article->setContent($content)) {           //funktion i klass för att sätta innehållet. 
         $success = false;
-        echo "<p>Ange innehåll</p>";
+        echo "<p class='error'>Ange innehåll</p>";
     }
 
     if ($success) {
         if ($article->addArticle($title, $content)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
-            echo "<p>Artikel tillagd</p>";
+            echo "<p class='correct'>Artikel tillagd</p>";
         } else {
-            echo "<p>Fel vid lagring</p>";
+            echo "<p class='error'>Fel vid lagring</p>";
         }
     } else {
-        echo "<p>Fel vid lagring, kontrollera input</p>";
+        echo "<p class='error'>Fel vid lagring, kontrollera input</p>";
     }
 }
 

@@ -167,7 +167,20 @@ margin-bottom: 4%;
 form {              /* utseende formulär */
 width: 100%;
 box-sizing: border-box;
+}
 
+.error {
+    color:#ac3954;
+}
+
+.correct {
+    color: #3a54ac;
+}
+
+.btn:disabled {
+    background-color: grey;
+    color: lightgrey;
+    cursor: default;
 }
 
 .area {                 /* utseende formulär hela */
@@ -189,6 +202,7 @@ input {
     cursor: pointer;
     border-style: solid;
     border-radius: 3px;
+    
 }
 
 .btn:hover {

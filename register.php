@@ -12,12 +12,12 @@ if (isset($_POST['username'])) {
 
     $users = new Users();
     if ($users->usernameExists($username)) {
-        $message = "<p>Användarnamn finns redan</p>";
+        $message = "<p class='error'>Användarnamn finns redan</p>";
     } else {
         if ($users->registerUser($username, $password, $name)) {
-            $message = "<p>Användare tillagd!</p>";
+            $message = "<p class='correct'>Användare tillagd!</p>";
         } else {
-            $message = "<p>Fel uppstod, försök igen!</p>";
+            $message = "<p class='error'>Fel uppstod, försök igen!</p>";
         }
     }
 }
@@ -49,16 +49,15 @@ if (isset($message)) {
         <!-- <label for="lastname">Efternamn</label><br>
         <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken!"><br>
          -->
-        <input class=checkbox type="checkbox" id="approve" name="approve"> <!-- onchange="approve()" -->
+        <div>
+        <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()"> 
         <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>
-        <button class="btn" type="submit" id="submituser">Skapa bloggare</button> <!-- disabled -->
+        <button class="btn" type="submit"  id="submituser" disabled>Skapa bloggare</button> 
+        </div>
+
     </form>
 </article>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
 
-
-
-
-<!-- string password_hash (string $password, int $algo [, array $options]) -->

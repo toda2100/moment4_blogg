@@ -12,7 +12,7 @@
     if ($users->login($username, $password)) {
         header("Location: admin.php");
     } else {
-        $message = "Felaktigt användarnamn eller lösenord";
+        $message = "<p class='error'>Felaktigt användarnamn eller lösenord</p>";
     }
 }
 ?>
@@ -24,11 +24,11 @@
 <p>Logga in för att hantera artiklar.</p>
 
 <?php if (isset($_GET['message'])) {                                 //felmeddelanden 
-    echo "<p style=color:red;>" . $_GET['message'] . "</p>";
+    echo "<p class='error'>" . $_GET['message'] . "</p>";
 }
 
 if (isset($message)) {
-    echo "<p style=color:red;>" . $message . "</p>";
+    echo "$message";
 }
 ?>
 

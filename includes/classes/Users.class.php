@@ -78,6 +78,10 @@ class Users
     // get och set för user/pass och name. kanske id är namn? och då köra namnet finns. skilja på bloggare? 
     
 
+    //get name kanske med mer från DB? 
+
+
+
 //destruct
 function __destruct()
 {
