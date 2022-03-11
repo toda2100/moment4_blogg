@@ -35,9 +35,7 @@ foreach ($article_list as $a) {                         //liten loop f√∂r de tv√
 
 <?php
 }
-
 ?>
-
 
 </section>
 

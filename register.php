@@ -5,23 +5,44 @@
 <!-- (if session - index? ) -->
 
 <?php
+$users = new Users();
 if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $name = $_POST['firstname'];
 
-    $users = new Users();
     if ($users->usernameExists($username)) {
         $message = "<p class='error'>Användarnamn finns redan</p>";
     } else {
 
-//set? x 3 username, password, name. 
+        //start
+        $success = true;    
 
-        if ($users->registerUser($username, $password, $name)) {
-            $message = "<p class='correct'>Användare tillagd!</p>";
-        } else {
-            $message = "<p class='error'>Fel uppstod, försök igen!</p>";
+        if (!$users->setUsername($username)) {          //funktion i klass för att sätta Titel. 
+            $success = false;
+            $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
         }
+    
+        if (!$users->setPassword($password)) {           //funktion i klass för att sätta innehållet. 
+            $success = false;
+            $message =  "<p class='error'>Ange lösenord med minst 5 tecken</p>";
+        }
+
+        if (!$users->setName($name)) {           //funktion i klass för att sätta innehållet. 
+            $success = false;
+            $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
+        }
+    
+        if ($success) {
+            if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
+                $message =  "<p class='correct'>Användare tillagd</p>";
+            } else {
+                $message =  "<p class='error'>Fel vid lagring</p>";
+            }
+        } else {
+            $message =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
+        } 
+
     }
 }
 ?>

@@ -21,6 +21,10 @@ class Users
     // ny användare
     public function registerUser($username, $password, $name)
     {
+        if (!$this->setUsername($username)) return false;
+        if (!$this->setPassword($password)) return false;
+        if (!$this->setName($name)) return false;
+
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
         $name = $this->db->real_escape_string($name);
@@ -36,6 +40,7 @@ class Users
     // logga in användare som finns 
     function login($username, $password)
     {
+
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
 
@@ -75,43 +80,7 @@ class Users
         }
     }
 
-    // set för user/pass och name. MÅSTE ÄVEN GÖRAS KONTROLLER VID INSKRIVNING AV DETTA ! hasning och tvätta från html?
-    function setUsername (string $username) : bool {
-
-        if(strlen($username) > 4) {//innehåller tecken
-        $this->username = $username;
-        return true;
-    }
-        return false;
-    }
-
-    function setPassword (string $password) : bool {
-
-        if(strlen($password) > 4) {//innehåller tecken
-        $this->password = $password;
-        return true;
-    }
-        return false;
-    }
-    
-    function setName (string $name) : bool {
-
-        if(strlen($name) > 4) {//innehåller tecken
-        $this->name= $name;
-        return true;
-    }
-        return false;
-    }
-
-
-
-     //kolla sets
-     // if (!$this->setUsername($username)) return false;
-     // if (!$this->setPassword($password)) return false;
-     // if (!$this->setName($name)) return false;
-    //get name kanske med mer från DB? kanske id är namn? och då köra namnet finns. skilja på bloggare? 
-
-  /*   public function getNameById(int $id): array
+    /*   public function getNameById(int $id): array
     {
         $id = intval($id);
         $sql = "SELECT * FROM articles WHERE id=$id;";
@@ -119,10 +88,63 @@ class Users
         return $data->fetch_assoc();
     } */
 
-//destruct
-function __destruct()
-{
-    mysqli_close($this->db);
-}
+    //Get use by id
+    public function getNameById(int $id): string
+    {
+        $sql = "SELECT name FROM users WHERE id=$id;";
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
 
+        return $row['name'];
+    }
+
+    public function getName(): string
+    {    //vid behov
+        return $this->name;
+    }
+
+    public function getUsers(): array
+    {  //alla 
+        $sql = "SELECT * FROM users ORDER BY name ASC";
+        $result = $this->db->query($sql);
+
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    // set för user/pass och name. (hasning och tvättning av HTML??)
+    function setUsername(string $username): bool
+    {
+
+        if (strlen($username) > 4) { //innehåller tecken
+            $this->username = $username;
+            return true;
+        }
+        return false;
+    }
+
+    function setPassword(string $password): bool
+    {
+
+        if (strlen($password) > 4) { //innehåller tecken
+            $this->password = $password;
+            return true;
+        }
+        return false;
+    }
+
+    function setName(string $name): bool
+    {
+
+        if (strlen($name) > 4) { //innehåller tecken
+            $this->name = $name;
+            return true;
+        }
+        return false;
+    }
+
+    //destruct
+    function __destruct()
+    {
+        mysqli_close($this->db);
+    }
 } //sluttagg

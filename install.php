@@ -29,11 +29,11 @@ name VARCHAR (128) NOT NULL
 );
 ";
 
-//$sql .= "ALTER TABLE ARTICLES ADD CONSTRAINT ID_ARTICLES_FK FOREIGN KEY (IDUSER) REFERENCES USERS (ID);";
+//$sql .= "ALTER TABLE articles ADD CONSTRAINT ID_ARTICLES_FK FOREIGN KEY (IDUSER) REFERENCES USERS (ID);";
 
-echo "<pre>$sql</pre>";                     
+echo "<pre>$sql</pre>";           //visa på skärm          
 
-if($db->multi_query($sql)) { 
+if($db->multi_query($sql)) {        //skicka frågan(orna)
 echo "Tabell skapad";
 } else {
     echo "Fel vid skapande av tabell";

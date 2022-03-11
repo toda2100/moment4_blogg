@@ -18,12 +18,26 @@
 
     </ol>
 
-<ol>
+<!-- <ol>
 <li>Bloggare 1</li>
 <li>Bloggare 2</li>
 <li>Bloggare 3</li>
-</ol>
+</ol> -->
 
+<?php
+
+$blogger = new Users();
+$blogger_list = $blogger->getUsers();
+
+foreach ($blogger_list as $b) {
+    ?>
+
+<ol>
+<li><?= $b['name']; ?></li>
+</ol>
+    <?php
+}
+?>
 
 </section>
 
