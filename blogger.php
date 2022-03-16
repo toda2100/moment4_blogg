@@ -10,7 +10,7 @@ include("includes/header.php"); ?>
 
 <?php                               //hämta lista via klassfunktion
 $article = new Article();
-$article_list = $article->getArticles();            
+$article_list = $article->getArticleByUser('name');            
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>

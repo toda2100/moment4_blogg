@@ -30,6 +30,7 @@ foreach ($article_list as $a) {                         //liten loop för de tv�
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
         <p><b>Skriven av: </b><?= $a['name']; ?></p>
+        <p><a href="blogger.php?name=<?= $a['name']; ?>">Läs mer</a></p>
         <!-- Bloggarens namn med länk till sida där alla finns -->
    
     </article>
