@@ -8,6 +8,7 @@ class Article
     private $db;
     private $title;
     private $content;
+    //private $username;
 
     function __construct()   //construct. 
     {
@@ -20,15 +21,18 @@ class Article
 
     //addera article
 
-    public function addArticle(string $title, string $content): bool
+    public function addArticle(string $title, string $content, string $username): bool  
     {
+
+        $username = $_SESSION['username'];  //skicka med vem som är användare. Måste den set? 
         //kolla sets
         if (!$this->setTitle($title)) return false;
         if (!$this->setContent($content)) return false;
 
         //sql fråga in i db
-
-        $sql = "INSERT INTO articles(title, content)VALUES('" . $this->title . "','" . $this->content . "');";
+        
+        $sql = "INSERT INTO articles(title, content, username)VALUES('" . $this->title . "','" . $this->content . "','" . $username . "');";
+        //$sql = "INSERT INTO articles(title, content, username)VALUES('" . $this->title . "', '" . $this->content . "', '" . $_SESSION['username'] . "' );";
 
         // skicka med retur
 
@@ -109,5 +113,3 @@ class Article
 
 
 
-// SQL-frågan bli liknande ”GET * FROM users WHERE username = username”. Eller user_id om du hellre kör på det.
-// Ska du skapa ett inlägg så har du ju då inloggad användare i en Sessions-variabel du kan skicka med till databasen.

@@ -36,6 +36,8 @@ $content = "";
 if (isset($_POST['title'])) {                       //hämta från inputfält 
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $username = $_SESSION['username']; //tillagd
+
 
     // $title = strip_tags($title);    // rensa från htmlkod 
 
@@ -52,7 +54,7 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     }
 
     if ($success) {
-        if ($article->addArticle($title, $content)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
+        if ($article->addArticle($title, $content, $username)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
             echo "<p class='correct'>Artikel tillagd</p>";
         } else {
             echo "<p class='error'>Fel vid lagring</p>";
@@ -64,6 +66,12 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
 
 ?>
 
+<?php                                //Utskrift av vem som är inloggad 
+
+if (isset($_SESSION['username'])) //byt till kopplad person! 
+echo $_SESSION['username'];
+?>
+
 <article class="formsarea">                     
     <!-- formulär för input av innehållet och titel  -->
     <form method="post" action="admin.php">
@@ -71,11 +79,10 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
         <input class="area" type="text" name="title" id="title" placeholder="Rubrik!"><br>
         <label for="content">Innehåll</label><br>
         <textarea class="textinput" type="text" name="content" id="content" placeholder="Din nyhet!"></textarea><br>
+        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />   
         <button class="btn" type="submit">Skapa nyhet</button>
     </form>
 </article>
-
-
 
 <?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista. 
 $article = new Article();

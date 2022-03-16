@@ -8,14 +8,14 @@ if($db->connect_errno > 0 ) {
 die("Fel vid anslutning: " . $db->connect_error);
 }
 
-$sql = "DROP TABLE IF EXISTS articles, users;";        //SQL-frågor skapa tabell. Skapa koluner enligt nedan. 
+$sql = "DROP TABLE IF EXISTS articles, users;";        //SQL-frågor skapa tabell. Skapa koluner enligt nedan.
 
 $sql .=  "                                          
 CREATE TABLE articles(
 id INT(11) PRIMARY KEY AUTO_INCREMENT,
 title VARCHAR (128) NOT NULL,
 content TEXT NOT NULL,
-iduser INT(11), 
+username VARCHAR (64) NOT NULL,          
 postade TIMESTAMP NOT NULL DEFAULT current_timestamp()
 );
 ";
@@ -29,7 +29,8 @@ name VARCHAR (128) NOT NULL
 );
 ";
 
-//$sql .= "ALTER TABLE articles ADD CONSTRAINT ID_ARTICLES_FK FOREIGN KEY (IDUSER) REFERENCES USERS (ID);";
+//skicka koppling mellan tabllerna, dvs username till username. Unikt i ena tabellen, dvs går inte att skapa artikel annars. Ej unikt i artikel - då fler artiklar skapas av samma person. 
+$sql .= "ALTER TABLE articles ADD CONSTRAINT ID_ARTICLES_FK FOREIGN KEY (USERNAME) REFERENCES USERS (USERNAME);";
 
 echo "<pre>$sql</pre>";           //visa på skärm          
 

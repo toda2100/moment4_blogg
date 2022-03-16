@@ -29,7 +29,7 @@ class Users
         $password = $this->db->real_escape_string($password);
         $name = $this->db->real_escape_string($name);
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);          //hasha passw. 
 
         $sql = "INSERT INTO users(username, password, name)VALUES('$username', '$hashed_password', '$name');"; //sql för att skicka in i databas
 
@@ -38,13 +38,13 @@ class Users
     }
 
     // logga in användare som finns 
-    function login($username, $password)
+    function login($username, $password)  
     {
 
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
 
-        $sql = "SELECT * FROM users WHERE username='$username';";
+        $sql = "SELECT * FROM users WHERE username='$username';";           //hämta även namn?? lägg till upptill och sen är session lika med namn?
         $result = $this->db->query($sql);
 
         if ($result->num_rows > 0) {  //får vi någon respons så starta session
@@ -54,7 +54,7 @@ class Users
 
             if (password_verify($password, $stored_password)) {
 
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $username;  
                 return true;
             } else {
                 return false;
@@ -80,7 +80,7 @@ class Users
         }
     }
 
-    /*   public function getNameById(int $id): array
+       /* public function getNameById(int $id): array
     {
         $id = intval($id);
         $sql = "SELECT * FROM articles WHERE id=$id;";
@@ -88,7 +88,7 @@ class Users
         return $data->fetch_assoc();
     } */
 
-    //Get use by id
+   //Get use by id
     public function getNameById(int $id): string
     {
         $sql = "SELECT name FROM users WHERE id=$id;";
@@ -97,6 +97,16 @@ class Users
 
         return $row['name'];
     }
+
+
+/*     public function getNameByUsername($username): string
+    {
+        $sql = "SELECT name FROM users WHERE username=$username;";
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
+
+        return $row['name'];
+    } */
 
     public function getName(): string
     {    //vid behov
