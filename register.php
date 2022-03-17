@@ -35,7 +35,7 @@ if (isset($_POST['username'])) {
     
         if ($success) {
             if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
-                $message =  "<p class='correct'>Användare tillagd</p>";
+                $message =  "<p class='correct'>Användare tillagd, <a href='login.php'>logga in här!</a></p>";
             } else {
                 $message =  "<p class='error'>Fel vid lagring</p>";
             }

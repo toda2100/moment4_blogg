@@ -23,8 +23,11 @@ foreach ($article_list as $a) {             //loopa hela listan för utskrift ne
     </article>
 <?php
 }
+?>
 
-
+<?php 
+$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+echo "<a href='$back'>Föregående sida</a>";
 ?>
 
 <?php include("includes/sidebar.php"); ?>

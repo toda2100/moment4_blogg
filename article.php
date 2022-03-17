@@ -24,6 +24,10 @@ include("includes/header.php");
 <p>Publicerad: <?=$thearticle['postade'];?></p>
 
 </article>
+<?php 
+$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+echo "<a href='$back'>Föregående sida</a>";
+?>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
