@@ -41,3 +41,25 @@ foreach ($blogger_list as $b) {
 
 </section>
 
+<section>
+<?php
+$article = new Article();                       //hämta artiklar. 
+$article_list = $article->getArticles();
+
+if(count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+    echo "<p class='error'>Inga bloggare är registrerade ännu!</p>";
+} 
+                
+foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
+
+?>
+    <ol>
+
+        <li><a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></li>
+        
+</ol>
+
+<?php
+}
+?>
+</section>
