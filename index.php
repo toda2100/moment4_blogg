@@ -6,7 +6,7 @@
 <?php $page_title = "Startsida";
 include("includes/header.php"); ?>
 
-<h1>Senaste artiklarna hittar du här.</h1>
+<h1>Senaste inläggen</h1>
 <p>Klicka för alla läsa mer eller se alla artiklar under fliken artiklar</p>
 
 <section>
@@ -29,9 +29,7 @@ foreach ($article_list as $a) {                         //liten loop för de tv�
         <p><b>Publicerad: </b><?= $a['postade']; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
-        <!-- <p><b>Skriven av: </b><?= $a['name']; ?></p> -->
         <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
-        <!-- Bloggarens namn med länk till sida där alla finns -->
    
     </article>
 

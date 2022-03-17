@@ -7,59 +7,41 @@
     <!-- Sidebar, lista. Tillagd PHP-funktion för att kunna visa vilken sida man är på via CSS -->
     <ol>
         <li <?php if ($page_title == "Startsida") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Startsida") echo 'class="current"'; ?> href="index.php">Senaste</a></li>
-        <li <?php if ($page_title == "Artiklar") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Artiklar") echo 'class="current"'; ?> href="articles.php">Bloggare</a></li>       
+        <li <?php if ($page_title == "Artiklar") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Artiklar") echo 'class="current"'; ?> href="articles.php">Artiklar</a></li>
         <li <?php if ($page_title == "Om") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Om") echo 'class="current"'; ?> href="about.php">Om</a></li>
-        <?php
-        if (isset($_SESSION['username']) && ($_SESSION['username'])) {          //visas om inloggad 
-            echo '<a class="logout" href="logout.php">Logga ut</a>';
-        }
-
-        ?>
-
     </ol>
 
-<!-- <ol>
-<li>Bloggare 1</li>
-<li>Bloggare 2</li>
-<li>Bloggare 3</li>
-</ol> -->
 
-<?php
+    <?php                                //Utskrift av vem som är inloggad 
 
-$blogger = new Users();
-$blogger_list = $blogger->getUsers();
-
-foreach ($blogger_list as $b) {
+    if (isset($_SESSION['username'])) {
+        $user = new Users();
+        $username = $_SESSION['username'];
+        $user = $user->getNameByUsername($username);
+        echo "<p><b>Inloggad som: </b>" . "<br>" . $user . "</p>";
+    } else {
+        echo "Registrera dig för att börja blogga!";
+    }
     ?>
 
-<ol>
-<li><?= $b['name']; ?></li>
-</ol>
+    <h2>Våra bloggare</h2>
+
     <?php
-}
-?>
 
-</section>
+    $blogger = new Users();
+    $blogger_list = $blogger->getUsersByName();
 
-<section>
-<?php
-$article = new Article();                       //hämta artiklar. 
-$article_list = $article->getArticles();
+    foreach ($blogger_list as $b) {
+    ?>
 
-if(count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
-    echo "<p class='error'>Inga bloggare är registrerade ännu!</p>";
-} 
-                
-foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
+        <ul>
 
-?>
-    <ol>
+            <li><a href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name']; ?></a></li>
 
-        <li><a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></li>
-        
-</ol>
+        </ul>
+    <?php
+    }
+    ?>
 
-<?php
-}
-?>
+
 </section>

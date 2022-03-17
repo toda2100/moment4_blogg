@@ -24,6 +24,13 @@ class Article
     public function addArticle(string $title, string $content, string $username): bool  
     {
 
+/*     function formatField($input)
+{
+    $input = strip_tags($input);
+    $input = mysql_real_escape_string($input);
+    return trim($input);
+} */
+
         $username = $_SESSION['username'];  //skicka med vem som är användare. Måste den set? 
         //kolla sets
         if (!$this->setTitle($title)) return false;
@@ -60,14 +67,14 @@ class Article
         return $data->fetch_assoc();
     }
 
-  function getArticleByUser(){
+    public function getArticleByUser(){
         //$sql = "SELECT * FROM articles WHERE username='" . $_GET['userid'] . "' ORDER BY date DESC";  //innerjoin? klicka på något som initerar ID.
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name, users.id FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;"; 
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;"; 
         $result = $this->db->query($sql);
         
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
         
-    }  
+    }   
 
     // hämta/get skriv ut
 
@@ -76,7 +83,7 @@ class Article
         //sqlfråga
 
         //$sql = "SELECT * FROM articles ORDER BY postade DESC;"; //fråga utan innerjoin för ev utskrift utan namn.
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name, users.id FROM articles INNER JOIN users ON articles.username=users.username;";
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username;";
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);

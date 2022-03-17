@@ -19,6 +19,10 @@ include("includes/header.php"); ?>
 <?php
 $article = new Article();           //hämta klass
 
+// innehållet vid laddning, tomt. 
+$title = "";
+$content = "";
+
 if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta på deleteid - kör klassfunktion deletearticle
     $id = intval($_GET['deleteid']);
 
@@ -29,17 +33,14 @@ if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta
     }
 }
 
-// innehållet vid laddning, tomt. 
-$title = "";
-$content = "";
-
 if (isset($_POST['title'])) {                       //hämta från inputfält 
     $title = $_POST['title'];
     $content = $_POST['content'];
     $username = $_SESSION['username']; //tillagd
 
 
-    // $title = strip_tags($title);    // rensa från htmlkod 
+    $title = strip_tags($title);    // rensa från htmlkod 
+    $content = strip_tags($content, '<b><br>'); //$allowed_tags = ev. 
 
     $success = true;    
 
@@ -56,6 +57,7 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     if ($success) {
         if ($article->addArticle($title, $content, $username)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
             echo "<p class='correct'>Artikel tillagd</p>";
+            $title = ""; $content = "";
         } else {
             echo "<p class='error'>Fel vid lagring</p>";
         }
@@ -68,23 +70,29 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
 
 <?php                                //Utskrift av vem som är inloggad 
 
-if (isset($_SESSION['username'])) //byt till kopplad person! 
-echo $_SESSION['username'];
+if (isset($_SESSION['username'])) {
+$user = new Users();
+$username = $_SESSION['username'];
+$user = $user->getNameByUsername($username);
+echo $user;
+} else {
+    echo "fel";
+}
 ?>
 
 <article class="formsarea">                     
     <!-- formulär för input av innehållet och titel  -->
     <form method="post" action="admin.php">
         <label for="title">Titel</label><br>
-        <input class="area" type="text" name="title" id="title" placeholder="Rubrik!"><br>
+        <input class="area" type="text" name="title" id="title" value="<?= $title;?>"><br>
         <label for="content">Innehåll</label><br>
-        <textarea class="textinput" type="text" name="content" id="content" placeholder="Din nyhet!"></textarea><br>
+        <textarea class="textinput" type="text" name="content" id="content" value="<?= $content;?>"></textarea><br>   
         <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />   
         <button class="btn" type="submit">Skapa nyhet</button>
     </form>
 </article>
 
-<?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista. 
+<?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista. //placeholder="Din nyhet!"
 $article = new Article();
 $article_list = $article->getArticles();
 
@@ -101,6 +109,9 @@ foreach ($article_list as $a) {                 //rulla igenom hela array skriv 
 <?php
 }
 ?>
+
+
+//GET ARTICLE BY USER INSTEAD SOM VID BLOGGER!! 
 
 <a class="logout" href="logout.php">Logga ut</a>     
 

@@ -9,8 +9,6 @@
     echo "<p>Kontakt <a href= 'mailto:$email'> $email</a></p>";
     ?>
 
-    <p>länk till om</p>
-
     <?php                   //visa olika om inloggad eller inte. 
     if (!isset($_SESSION['username']) && empty($_SESSION['username'])) {
         echo '<a href="login.php"><b>Logga in</b></a>';

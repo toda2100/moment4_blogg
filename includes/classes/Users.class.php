@@ -88,7 +88,7 @@ class Users
         return $data->fetch_assoc();
     } */
 
-   //Get use by id
+   //Get user by id
     public function getNameById(int $id): string
     {
         $sql = "SELECT name FROM users WHERE id=$id;";
@@ -98,30 +98,41 @@ class Users
         return $row['name'];
     }
 
-
-/*     public function getNameByUsername($username): string
+   public function getNameByUsername($username): string    //KÖR DEN OCH SKRIV UT SESSION? IF OSV 
     {
-        $sql = "SELECT name FROM users WHERE username=$username;";
+        $username = $_SESSION['username'];
+        //$sql = "SELECT name FROM users WHERE ['username']=$username;";
+        $sql ="SELECT name FROM users WHERE username='$username';"; 
         $result = $this->db->query($sql);
         $row = $result->fetch_assoc();
 
-        return $row['name'];
-    } */
+        return $row['name']; 
+    }    
 
-    public function getName(): string
+    function getUsersByName(){
+        $sql = "SELECT name FROM users ORDER BY username ASC";
+        $result = $this->db->query($sql);
+        
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        
+    }
+
+   /*  public function getName(): string
     {    //vid behov
         return $this->name;
-    }
+    } */
 
-    public function getUsers(): array
+    public function getUsers(): array   //GÖR EN LIKADAN MED BARA HÄMTA VIA NAMN OCH EN ARRAY !!!
     {  //alla 
-        $sql = "SELECT * FROM users ORDER BY name ASC";
+        //$sql = "SELECT * FROM users ORDER BY name ASC";   //LÄGG TILL JOIN? vad händer om de inte har skrivit artikel? 
+        $sql = "SELECT users.name, users.id, articles.title, articles.id, articles.content, articles.postade FROM users INNER JOIN articles ON users.username=articles.username ORDER BY name ASC"; 
+
         $result = $this->db->query($sql);
 
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
     }
 
-    // set för user/pass och name. (hasning och tvättning av HTML??)
+    // set för user/pass och name. 
     function setUsername(string $username): bool
     {
 
@@ -135,7 +146,7 @@ class Users
     function setPassword(string $password): bool
     {
 
-        if (strlen($password) > 4) { //innehåller tecken
+        if (strlen($password) > 4) { //innehåller minst 5 tecken
             $this->password = $password;
             return true;
         }
@@ -145,7 +156,7 @@ class Users
     function setName(string $name): bool
     {
 
-        if (strlen($name) > 4) { //innehåller tecken
+        if (strlen($name) > 4) { //innehåller minst 5 tecken
             $this->name = $name;
             return true;
         }

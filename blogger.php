@@ -6,22 +6,27 @@
 <?php $page_title = "Blogger";          //hämta från User osv !!
 include("includes/header.php"); ?>
 
-<h1>Alla artiklar från XX hämta in! USER</h1>
+<h1>Alla bloggarens artiklar</h1>
+
 
 <?php                               //hämta lista via klassfunktion
 $article = new Article();
-$article_list = $article->getArticleByUser('name');            
+$article_list = $article->getArticleByUser('name');
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>
+
     <article>
         <h3><?= $a['title']; ?></h3>
         <p><b>Publicerad: </b><?= $a['postade']; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs hela artikeln</a></p>
+        <p>Skriven av: <?= $a['name']; ?></p>
     </article>
 <?php
 }
+
+
 ?>
 
 <?php include("includes/sidebar.php"); ?>

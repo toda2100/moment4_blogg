@@ -15,13 +15,9 @@ $article = new Article();           //hämta klass
 if(isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
-    //$article = new Article();           //hämta klass
-
     if (isset($_POST['title'])) {                       //hämta från inputfält 
         $title = $_POST['title'];
         $content = $_POST['content'];
-    
-        // $title = strip_tags($title);    // rensa från htmlkod 
     
         $success = true;
         $message = "";    
