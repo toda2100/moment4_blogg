@@ -6,12 +6,10 @@
 <?php $page_title = "Blogger";          //hämta från User osv !!
 include("includes/header.php"); ?>
 
-<h1>Alla bloggarens artiklar</h1>
-
-
 <?php                               //hämta lista via klassfunktion
 $article = new Article();
 $article_list = $article->getArticleByUser('name');
+echo "<h1>Alla artiklar av " . $_GET['name'] . "</h1>";
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>
