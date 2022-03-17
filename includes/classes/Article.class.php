@@ -57,6 +57,7 @@ class Article
         return mysqli_query($this->db, $sql);
     }
 
+ // hämta/get skriv ut
 
     //hämta en artikel för undersida exempelvis, get via Id. 
     public function getArticleById(int $id): array
@@ -68,7 +69,8 @@ class Article
     }
 
     public function getArticleByUser(){
-        //$sql = "SELECT * FROM articles WHERE username='" . $_GET['userid'] . "' ORDER BY date DESC";  //innerjoin? klicka på något som initerar ID.
+        //$sql = "SELECT * FROM articles WHERE username='" . $_GET['userid'] . "' ORDER BY date DESC";  
+        
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;"; 
         $result = $this->db->query($sql);
         
@@ -76,18 +78,33 @@ class Article
         
     }   
 
-    // hämta/get skriv ut
-
     public function getArticles(): array
     {
         //sqlfråga
-
         //$sql = "SELECT * FROM articles ORDER BY postade DESC;"; //fråga utan innerjoin för ev utskrift utan namn.
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username;";
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
     }
+
+//
+    public function getArticlebyUsername($username): array  
+    {
+        $username = $_SESSION['username'];
+        //$sql ="SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE username='$username';"; 
+        
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';"; 
+
+        $alldata = mysqli_query($this->db, $sql);
+
+        return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
+
+         $result = $this->db->query($sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
+    }   
+//
+
 
 
     //ta bort article 

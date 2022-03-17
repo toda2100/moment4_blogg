@@ -122,9 +122,9 @@ class Users
         return $this->name;
     } */
 
-    public function getUsers(): array   //GÖR EN LIKADAN MED BARA HÄMTA VIA NAMN OCH EN ARRAY !!!
+    public function getUsers(): array   
     {  //alla 
-        //$sql = "SELECT * FROM users ORDER BY name ASC";   //LÄGG TILL JOIN? vad händer om de inte har skrivit artikel? 
+        //$sql = "SELECT * FROM users ORDER BY name ASC";   //vad händer om de inte har skrivit artikel? 
         $sql = "SELECT users.name, users.id, articles.title, articles.id, articles.content, articles.postade FROM users INNER JOIN articles ON users.username=articles.username ORDER BY name ASC"; 
 
         $result = $this->db->query($sql);

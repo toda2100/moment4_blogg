@@ -14,7 +14,19 @@ if (!isset($_SESSION['username'])) {
 include("includes/header.php"); ?>    
 
 <h1>Skapa nytt inlägg</h1>
-<p>Skriva en artikel om Bodensee!</p>
+<p>Skriv en artikel om Bodensee!</p>
+
+<?php                                //Utskrift av vem som är inloggad 
+
+if (isset($_SESSION['username'])) {
+$user = new Users();
+$username = $_SESSION['username'];
+$user = $user->getNameByUsername($username);
+echo "<p>Hej " . $user . "!</p>";
+} else {
+    echo "fel";
+}
+?>
 
 <?php
 $article = new Article();           //hämta klass
@@ -68,18 +80,6 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
 
 ?>
 
-<?php                                //Utskrift av vem som är inloggad 
-
-if (isset($_SESSION['username'])) {
-$user = new Users();
-$username = $_SESSION['username'];
-$user = $user->getNameByUsername($username);
-echo $user;
-} else {
-    echo "fel";
-}
-?>
-
 <article class="formsarea">                     
     <!-- formulär för input av innehållet och titel  -->
     <form method="post" action="admin.php">
@@ -92,28 +92,30 @@ echo $user;
     </form>
 </article>
 
+
 <?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista. //placeholder="Din nyhet!"
 $article = new Article();
-$article_list = $article->getArticles();
+$article_list = $article->getArticlebyUsername($username);
+$username = $_SESSION['username'];
 
-foreach ($article_list as $a) {                 //rulla igenom hela array skriv ut nedan, med länk för att radera, begränsat med innehåll, samt läs mer. 
+foreach ($article_list as $b) {                 //rulla igenom hela array skriv ut nedan, med länk för att radera, begränsat med innehåll, samt läs mer. 
 ?>
 
     <article>
-        <h3><?= $a['title']; ?></h3>           
-        <p><a href="admin.php?deleteid=<?= $a['id']; ?>">Radera inlägg</a></p>
-        <p><a href="edit.php?id=<?= $a['id']; ?>">Ändra inlägg</a></p>
-        <p><?= substr($a['content'], 0, 150); ?>...</p>
-        <p><a href="article.php?id=<?= $a['id']; ?>">Se hela inlägget</a></p>
+        <h3><?= $b['title']; ?></h3>           
+        <p><a href="admin.php?deleteid=<?= $b['id']; ?>">Radera inlägg</a></p>
+        <p><a href="edit.php?id=<?= $b['id']; ?>">Ändra inlägg</a></p>
+        <p><?= substr($b['content'], 0, 150); ?>...</p>
+        <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
     </article>
 <?php
 }
-?>
-
-
-//GET ARTICLE BY USER INSTEAD SOM VID BLOGGER!! 
+?> 
 
 <a class="logout" href="logout.php">Logga ut</a>     
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
+
+
+

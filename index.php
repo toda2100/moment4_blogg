@@ -18,7 +18,7 @@ if(count($article_list) == 0) {                 //kolla så listan inte är tom.
     echo "<p class='error'>Inga artiklar är publicerade!</p>";
 } 
                 
-$article_list = array_slice($article_list, 0, 4);           // välj enbart de senaste i arrayen för att loopa till utskrift
+$article_list = array_slice($article_list, 0, 5);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
