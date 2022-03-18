@@ -24,6 +24,8 @@ class Article
     public function addArticle(string $title, string $content, string $username): bool  
     {
 
+
+
         $username = $_SESSION['username'];  //skicka med vem som är användare. 
         //kolla sets
         if (!$this->setTitle($title)) return false;
@@ -80,7 +82,7 @@ class Article
 
     public function getArticlebyUsername($username): array  
     {
-        $username = $_SESSION['username'];        
+        //$username = $_SESSION['username'];        
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';"; 
 
         $alldata = mysqli_query($this->db, $sql);

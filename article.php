@@ -14,6 +14,10 @@ if (isset($_GET['id'])) {        //kontrollera om id finns så det inte går att
     header("Location: index.php");
 }
 
+$user= new Users();
+$username = $thearticle['username'];    
+$name = $user->getNameByUsername($username);
+
 $page_title = $thearticle['title'];     
 include("includes/header.php"); 
 ?>
@@ -22,13 +26,13 @@ include("includes/header.php");
 <h2><?=$thearticle['title'];?></h2>
 <p><?=$thearticle['content'];?></p>
 <p>Publicerad: <?=$thearticle['postade'];?></p>
+<p>Skriven av: <?=$name?></p>
 
 </article>
 
-<h3>Fler artiklar från samma bloggare</h3>
+<h3>Fler artiklar från <?=$name?></h3>
 
 <?php 
-//$article = new Article();
 $username = $thearticle['username'];
 $article_list = $article->getArticlebyUsername($username);
 
@@ -46,6 +50,7 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
         <p><?= substr($b['content'], 0, 50); ?>...</p>
         <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
     </article>
+
 <?php
 }
 ?> 

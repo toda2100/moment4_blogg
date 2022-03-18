@@ -90,9 +90,9 @@ class Users
         return $row['name'];
     }
 
-   public function getNameByUsername($username): string    //KÖR DEN OCH SKRIV UT SESSION? IF OSV 
+   public function getNameByUsername($username): string    //
     {
-        $username = $_SESSION['username'];
+        //$username = $_SESSION['username'];
         $sql ="SELECT name FROM users WHERE username='$username';"; 
         $result = $this->db->query($sql);
         $row = $result->fetch_assoc();
