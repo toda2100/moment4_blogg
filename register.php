@@ -94,7 +94,7 @@ if (isset($message2)) {
 
 </article>
 
-<script src="js/main.js"></script>
+<script src="js/register.js"></script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

@@ -41,7 +41,7 @@ include("includes/header.php"); ?>
     }
     ?>
 
-  <button id='open' onclick>Se fler artiklar</button>  
+  <button id='open' onclick()>Se fler artiklar</button>  
     
     <div id="element">
         <?php
@@ -77,18 +77,7 @@ include("includes/header.php"); ?>
 
 </section>
 
-<script>
-    document.getElementById("element").style.display = "none";      //hämta via ID för själva div. 
-    document.getElementById("all").style.display = "none";
-</script>
-<script>
-    let open = document.getElementById('open');
-    open.onclick = function() {                 //funktion körs för att dölja och ta bort knappar vid klick på att visa mer. 
-        document.getElementById('element').style.display = 'block';
-        document.getElementById('open').style.display = "none";
-        document.getElementById('all').style.display = "block";
-    }
-</script>
+<script src="js/main.js"></script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
