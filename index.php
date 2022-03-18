@@ -77,6 +77,7 @@ $newDate = $myDateTime->format('y-m-d h:i');
 </div>
 
 <a href="articles.php" id="all" >Se alla artiklar</a>
+<noscript><a href="articles.php">Se alla artiklar</a></noscript>
 
 </section>
 
@@ -87,9 +88,7 @@ open.onclick = function() {
     document.getElementById('element').style.display = 'block';
     document.getElementById('open').style.display = "none";
     document.getElementById('all').style.display = "block";
-
-    //if javas not enabled? show? 
-} </script>
+} </script> 
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

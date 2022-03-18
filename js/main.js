@@ -4,9 +4,7 @@ approve.onchange = function() {
   submituser.disabled = !this.checked;
 };
 
-// ev bara köra den här på Register-sidan för att undvika felmeddelande. If Javascript not enabled? 
-
-
+// bara köra den här på Register-sidan för att undvika felmeddelande. Om JS inte är installerad syns "noscript"
 
 
 

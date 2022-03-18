@@ -79,6 +79,9 @@ if (isset($message)) {
         </div>
 
     </form>
+
+    <noscript><p>Du måste ha Javascript påslaget för att logga in!</p></noscript>
+
 </article>
 
 <script src="js/main.js"></script>  
