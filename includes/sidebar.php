@@ -36,7 +36,7 @@
 
         <ul>
 
-            <li><a href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name']; ?></a></li>
+            <li><a href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name'] . " " . $b['lastname']; ?></a></li>
 
         </ul>
     <?php

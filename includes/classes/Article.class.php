@@ -71,7 +71,7 @@ class Article
     {
         $name = $_GET['name'];
         //sql-fråga med innerjoin med kopplung unikt användarnamn. 
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $name . "' ORDER BY postade DESC;";
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name, users.lastname FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $name . "' ORDER BY postade DESC;";
         $result = $this->db->query($sql);
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -80,7 +80,7 @@ class Article
     public function getArticles(): array
     {
         //sqlfråga med innerjoing för samtliga artiklar för att få med namn m.m. 
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username ORDER BY postade DESC;";
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name, users.lastname FROM articles INNER JOIN users ON articles.username=users.username ORDER BY postade DESC;";
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);

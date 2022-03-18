@@ -19,19 +19,21 @@ class Users
     }
 
     // ny användare
-    public function registerUser($username, $password, $name)
+    public function registerUser($username, $password, $name, $lastname)
     {
         if (!$this->setUsername($username)) return false;                   //hämta från set. 
         if (!$this->setPassword($password)) return false;
         if (!$this->setName($name)) return false;
+        if (!$this->setLastName($lastname)) return false;
 
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
         $name = $this->db->real_escape_string($name);
+        $lastname = $this->db->real_escape_string($lastname);
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);          //hasha passw. 
 
-        $sql = "INSERT INTO users(username, password, name)VALUES('$username', '$hashed_password', '$name');"; //sql för att skicka in i databas
+        $sql = "INSERT INTO users(username, password, name, lastname)VALUES('$username', '$hashed_password', '$name', '$lastname');"; //sql för att skicka in i databas
 
         $result = $this->db->query($sql);                //skicka frågan 
         return $result;
@@ -104,7 +106,7 @@ class Users
     //Get user via name
     function getUsersByName()
     {
-        $sql = "SELECT name FROM users ORDER BY username ASC";
+        $sql = "SELECT name, lastname FROM users ORDER BY username ASC";
         $result = $this->db->query($sql);
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -146,6 +148,16 @@ class Users
 
         if (strlen($name) > 4 && !strrpos($name, ' ')) { //innehåller minst 5 tecken och inga mellanslag!
             $this->name = $name;
+            return true;
+        }
+        return false;
+    }
+
+    function setLastName(string $lastname): bool
+    {
+
+        if (strlen($lastname) > 4 && !strrpos($lastname, ' ')) { //innehåller minst 5 tecken och inga mellanslag!
+            $this->lastname = $lastname;
             return true;
         }
         return false;

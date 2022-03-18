@@ -20,7 +20,7 @@ foreach ($article_list as $a) {             //loopa hela listan för utskrift ne
         <p><b>Publicerad: </b><?= $a['postade']; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs hela artikeln</a></p>
-        <p>Skriven av: <?= $a['name']; ?></p>   <!-- Vem om har skrivit -->
+        <p>Av: <?= $a['name'] . " " . $a['lastname']; ?></p>   <!-- Vem om har skrivit -->
     </article>
 <?php
 }

@@ -38,7 +38,7 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
             <p><?= substr($a['content'], 0, 300); ?>...</p>
             <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
             <p><b>Publicerad: </b><?= $a['postade']; ?></p>
-            <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name']; ?></a></p>
+            <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name'] . " " . $a['lastname']; ?></a></p>
 
         </article>
 
@@ -68,7 +68,7 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
                 <p><?= substr($a['content'], 0, 300); ?>...</p>
                 <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
                 <p><b>Publicerad: </b><?= $a['postade']; ?></p>
-                <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name']; ?></a></p>
+                <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name'] . " " . $a['lastname']; ?></a></p>
             </article>
 
 

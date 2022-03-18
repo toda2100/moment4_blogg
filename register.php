@@ -9,6 +9,7 @@ if (isset($_POST['username'])) {   //kolla finns något i input
     $username = $_POST['username'];
     $password = $_POST['password'];
     $name = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
 
     $success = true; //start, går vidare om sant. Annars felmeddelanden. 
 
@@ -32,8 +33,13 @@ if (isset($_POST['username'])) {   //kolla finns något i input
         $message =  "<p class='error'>Ange förnamn med minst 5 tecken och inga mellanslag</p>";
     }
 
+    if (!$users->setLastName($lastname)) {           //funktion i klass för att sätta innehållet. 
+        $success = false;
+        $message =  "<p class='error'>Ange efternamn med minst 5 tecken och inga mellanslag</p>";
+    }
+
     if ($success) {
-        if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
+        if ($users->registerUser($username, $password, $name, $lastname)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
             $message =  "<p class='correct'>Användare tillagd, <a href='login.php'>logga in här!</a></p>";
         } else {
             $message =  "<p class='error'>Fel vid lagring</p>";
@@ -52,7 +58,11 @@ if (isset($_POST['username'])) {   //kolla finns något i input
 
 <?php
 if (isset($message)) {
-    echo $message . $message2;
+    echo $message;
+} 
+
+if (isset($message2)) {
+    echo $message2;
 } 
 
 //skriv ut meddelanden ovan vid fel 
@@ -68,9 +78,8 @@ if (isset($message)) {
         <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!"><br>
         <label for="firstname">Förnamn</label><br>
         <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken!"><br>
-        <!-- <label for="lastname">Efternamn</label><br>
+        <label for="lastname">Efternamn</label><br>
         <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken!"><br>
-         -->
         <div>
             <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()"> <!-- disbaled, öppnas med javascript -->
             <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>

@@ -49,6 +49,7 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
         <h3><?= $b['title']; ?></h3>
         <p><?= substr($b['content'], 0, 50); ?>...</p>
         <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
+        <p>Skriven av: <?= $name ?></p>
     </article>
 
 <?php
