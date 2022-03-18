@@ -50,9 +50,8 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     $content = $_POST['content'];
     $username = $_SESSION['username']; //tillagd
 
-
     $title = strip_tags($title);    // rensa från htmlkod 
-    $content = strip_tags($content, '<b><br>'); //$allowed_tags = ev. 
+    $content = strip_tags($content, '<b><br><em>'); //$allowed_tags = ev. 
 
     $success = true;    
 
@@ -85,11 +84,12 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     <form method="post" action="admin.php">
         <label for="title">Titel</label><br>
         <input class="area" type="text" name="title" id="title" value="<?= $title;?>"><br>
-        <label for="content">Innehåll</label><br>
+        <label for="content">Innehåll *</label><br>
         <textarea class="textinput" type="text" name="content" id="content" value="<?= $content;?>"></textarea><br>   
         <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />   
         <button class="btn" type="submit">Skapa nyhet</button>
     </form>
+    <p>* enbart < b >, < br > och < em > är tillåtna html-taggar i artikeln.</p>
 </article>
 
 

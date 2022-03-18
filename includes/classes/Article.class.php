@@ -21,18 +21,20 @@ class Article
 
     //addera article
 
-    public function addArticle(string $title, string $content, string $username): bool  
+    public function addArticle(string $title, string $content, string $username): bool
     {
 
+        $title = $this->db->real_escape_string($title);               //tvätta sql för att minska riskt för injections. 
+        $content = $this->db->real_escape_string($content); 
+        $username = $this->db->real_escape_string($username);  
+        // $username = $_SESSION['username'];
 
-
-        $username = $_SESSION['username'];  //skicka med vem som är användare. 
         //kolla sets
         if (!$this->setTitle($title)) return false;
         if (!$this->setContent($content)) return false;
 
         //sql fråga in i db
-        
+
         $sql = "INSERT INTO articles(title, content, username)VALUES('" . $this->title . "','" . $this->content . "','" . $username . "');";
 
         // skicka med retur
@@ -40,9 +42,14 @@ class Article
         return mysqli_query($this->db, $sql);
     }
 
-//uppdatera article
+    //uppdatera article
 
-    public function updateArticle(int $id, string $title, string $content): bool {
+    public function updateArticle(int $id, string $title, string $content): bool
+    {
+
+        $title = $this->db->real_escape_string($title);               //tvätta sql för att minska riskt för injections. 
+        $content = $this->db->real_escape_string($content); 
+
         if (!$this->setTitle($title)) return false;
         if (!$this->setContent($content)) return false;
 
@@ -51,7 +58,7 @@ class Article
         return mysqli_query($this->db, $sql);
     }
 
- // hämta/get skriv ut
+    // hämta/get skriv ut
 
     //hämta en artikel för undersida exempelvis, get via Id. 
     public function getArticleById(int $id): array
@@ -62,14 +69,14 @@ class Article
         return $data->fetch_assoc();
     }
 
-    public function getArticleByUser() : array { 
-        
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;"; 
+    public function getArticleByUser(): array
+    {
+
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;";
         $result = $this->db->query($sql);
-        
+
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
-        
-    }   
+    }
 
     public function getArticles(): array
     {
@@ -80,16 +87,15 @@ class Article
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
     }
 
-    public function getArticlebyUsername($username): array  
+    public function getArticlebyUsername($username): array
     {
-        //$username = $_SESSION['username'];        
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';"; 
+        //$username = $_SESSION['username'];
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';";
 
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
-
-    }   
+    }
 
     //ta bort article 
     public function deleteArticle(int $id): bool
@@ -129,6 +135,3 @@ class Article
         mysqli_close($this->db);
     }
 } //slut
-
-
-

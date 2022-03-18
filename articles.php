@@ -16,17 +16,17 @@ $article_list = $article->getArticles();
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 
-$date =  $a['postade'];
+/* $date =  $a['postade'];
 $myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i');
-
+$newDate = $myDateTime->format('y-m-d h:i'); 
+<!-- <p><b>Publicerad: </b><?= $newDate; ?></p> -->*/
 
 ?>
     <article>
         <h3><?= $a['title']; ?></h3>
-        <p><b>Publicerad: </b><?= $newDate; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs hela artikeln</a></p>
+        <p><b>Publicerad: </b><?= $a['postade']; ?></p> 
         <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
 
     </article>

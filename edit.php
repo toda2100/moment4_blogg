@@ -19,6 +19,9 @@ if(isset($_GET['id'])) {
         $title = $_POST['title'];
         $content = $_POST['content'];
     
+        $title = strip_tags($title);    // rensa från htmlkod 
+        $content = strip_tags($content, '<b><br><em>'); //$allowed_tags = ev. 
+
         $success = true;
         $message = "";    
     
@@ -73,6 +76,7 @@ if(isset($message)) {
         <textarea class="textinput" type="text" name="content" id="content"><?=$articleinfo['content'];?></textarea><br>
         <button class="btn" type="submit">Bekräfta ändring</button>
     </form>
+    <p>* enbart < b >, < br > och < em > är tillåtna html-taggar i artikeln.</p>
 </article>
 
 <?php include("includes/sidebar.php"); ?>

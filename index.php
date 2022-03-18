@@ -27,17 +27,17 @@ $article_list = array_slice($article_list, 0, 3);           // välj enbart de s
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
-$date =  $a['postade'];
+/* $date =  $a['postade'];
 $myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i');
+$newDate = $myDateTime->format('y-m-d h:i');  */
 
 ?>
     <article>
 
         <h3><?= $a['title']; ?></h3>                    
-        <p><b>Publicerad: </b><?= $newDate; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
+        <p><b>Publicerad: </b><?= $a['postade']; ?></p> 
         <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
    
     </article>
@@ -54,24 +54,25 @@ $article = new Article();                       //hämta artiklar.
 $article_list = $article->getArticles();
 
 if(count($article_list) < 5) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
-    echo "<p class='error'>Inga artiklar går att visa!</p>";
+    echo "<p class='error'>Inga fler artiklar finns att visa.</p>";
 } 
                 
-$article_list = array_slice($article_list, 4, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
+$article_list = array_slice($article_list, 3, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
-$date =  $a['postade'];
+/* $date =  $a['postade'];
 $myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i');
+$newDate = $myDateTime->format('y-m-d h:i'); 
+<p><b>Publicerad: </b><?= $newDate; ?></p>*/
 
 ?>
 
     <article>
         <h3><?= $a['title']; ?></h3>                    
-        <p><b>Publicerad: </b><?= $newDate; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
+        <p><b>Publicerad: </b><?= $a['postade']; ?></p> 
         <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
     </article>
     
