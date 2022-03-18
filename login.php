@@ -3,13 +3,13 @@
 <?php include("includes/config.php"); ?>
 <!-- inkluderar konfiguartionsfil till header/varje sida -->
 
-<?php if (isset($_POST['username'])) {
+<?php if (isset($_POST['username'])) {   //kontrollera om det finns input 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $users = new Users();
 
-    if ($users->login($username, $password)) {
+    if ($users->login($username, $password)) {              //skickas till adminn om ok. 
         header("Location: admin.php");
     } else {
         $message = "<p class='error'>Felaktigt användarnamn eller lösenord</p>";
@@ -23,7 +23,7 @@
 <h2>Logga in</h2>
 <p>Logga in för att hantera artiklar.</p>
 
-<?php if (isset($_GET['message'])) {                                 //felmeddelanden 
+<?php if (isset($_GET['message'])) {                                 //felmeddelanden vi fel lösen osv. 
     echo "<p class='error'>" . $_GET['message'] . "</p>";
 }
 

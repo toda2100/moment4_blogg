@@ -2,27 +2,26 @@
 
 <?php include("includes/config.php"); ?>
 <!-- inkluderar konfiguartionsfil till header/varje sida -->
-<!-- (if session - index? ) -->
 
 <?php
-$users = new Users();
-if (isset($_POST['username'])) {
+$users = new Users();           //initiera klass 
+if (isset($_POST['username'])) {   //kolla finns något i input
     $username = $_POST['username'];
     $password = $_POST['password'];
     $name = $_POST['firstname'];
 
-    if ($users->usernameExists($username)) {
+    if ($users->usernameExists($username)) {                    //kolla om användarnamn är taget. 
         $message = "<p class='error'>Användarnamn finns redan</p>";
     } else {
 
-        //start
-        $success = true;    
+        //start, går vidare om sant. Annars felmeddelanden. 
+        $success = true;
 
         if (!$users->setUsername($username)) {          //funktion i klass för att sätta Titel. 
             $success = false;
             $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
         }
-    
+
         if (!$users->setPassword($password)) {           //funktion i klass för att sätta innehållet. 
             $success = false;
             $message =  "<p class='error'>Ange lösenord med minst 5 tecken</p>";
@@ -32,7 +31,7 @@ if (isset($_POST['username'])) {
             $success = false;
             $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
         }
-    
+
         if ($success) {
             if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
                 $message =  "<p class='correct'>Användare tillagd, <a href='login.php'>logga in här!</a></p>";
@@ -41,8 +40,7 @@ if (isset($_POST['username'])) {
             }
         } else {
             $message =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
-        } 
-
+        }
     }
 }
 ?>
@@ -56,7 +54,7 @@ if (isset($_POST['username'])) {
 <?php
 if (isset($message)) {
     echo $message;
-} //skriv ut meddelande vid fel 
+} //skriv ut meddelanden ovan vid fel 
 ?>
 
 <article class="formsarea">
@@ -73,19 +71,20 @@ if (isset($message)) {
         <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken!"><br>
          -->
         <div>
-        <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()"> 
-        <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>
-        <button class="btn" type="submit"  id="submituser" disabled>Skapa bloggare</button> 
+            <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()">  <!-- disbaled, öppnas med javascript -->
+            <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>
+            <button class="btn" type="submit" id="submituser" disabled>Skapa bloggare</button>
         </div>
 
     </form>
 
-    <noscript><p>Du måste ha Javascript påslaget för att logga in!</p></noscript>
+    <noscript>
+        <p>Du måste ha Javascript påslaget för att logga in!</p> <!-- Om JS är avstängt. -->
+    </noscript>
 
 </article>
 
-<script src="js/main.js"></script>  
+<script src="js/main.js"></script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
-

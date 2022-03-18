@@ -3,13 +3,14 @@
 <?php include("includes/config.php"); ?>
 <!-- inkluderar konfiguartionsfil till header/varje sida -->
 
-<?php $page_title = "Blogger";          //hämta från User osv !!
+<?php $page_title = "Blogger" ;          //
 include("includes/header.php"); ?>
 
 <?php                               //hämta lista via klassfunktion
 $article = new Article();
 $article_list = $article->getArticleByUser('name');
-echo "<h1>Alla artiklar av " . $_GET['name'] . "</h1>";
+$name = $_GET['name'];
+echo "<h1>Alla artiklar av " . $name . "</h1>";  //namn hämtas för rubrik
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>
@@ -19,13 +20,13 @@ foreach ($article_list as $a) {             //loopa hela listan för utskrift ne
         <p><b>Publicerad: </b><?= $a['postade']; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs hela artikeln</a></p>
-        <p>Skriven av: <?= $a['name']; ?></p>
+        <p>Skriven av: <?= $a['name']; ?></p>   <!-- Vem om har skrivit -->
     </article>
 <?php
 }
 ?>
 
-<?php 
+<?php
 $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
 echo "<a href='$back'>Föregående sida</a>";
 ?>

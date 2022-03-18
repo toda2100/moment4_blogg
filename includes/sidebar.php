@@ -25,10 +25,10 @@
     ?>
 
     <h2>Våra bloggare</h2>
-
+   
     <?php
 
-    $blogger = new Users();
+    $blogger = new Users();        //Utskrift av alla bloggare med länk till deras sidor via unikt namn
     $blogger_list = $blogger->getUsersByName();
 
     foreach ($blogger_list as $b) {

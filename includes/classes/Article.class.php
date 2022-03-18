@@ -25,8 +25,8 @@ class Article
     {
 
         $title = $this->db->real_escape_string($title);               //tvätta sql för att minska riskt för injections. 
-        $content = $this->db->real_escape_string($content); 
-        $username = $this->db->real_escape_string($username);  
+        $content = $this->db->real_escape_string($content);
+        $username = $this->db->real_escape_string($username);
         // $username = $_SESSION['username'];
 
         //kolla sets
@@ -48,31 +48,29 @@ class Article
     {
 
         $title = $this->db->real_escape_string($title);               //tvätta sql för att minska riskt för injections. 
-        $content = $this->db->real_escape_string($content); 
+        $content = $this->db->real_escape_string($content);
 
-        if (!$this->setTitle($title)) return false;
+        if (!$this->setTitle($title)) return false;   //hämta från sets 
         if (!$this->setContent($content)) return false;
-
+        //sql-fråga via id. Skicka innehållt och titel enbart.      
         $sql = "UPDATE articles SET title='" . $this->title . "' , content= '" . $this->content . "' WHERE id=$id;";
 
         return mysqli_query($this->db, $sql);
     }
 
-    // hämta/get skriv ut
-
     //hämta en artikel för undersida exempelvis, get via Id. 
     public function getArticleById(int $id): array
     {
         $id = intval($id);
-        $sql = "SELECT * FROM articles WHERE id=$id;";
+        $sql = "SELECT * FROM articles WHERE id=$id;";   
         $data = mysqli_query($this->db, $sql);
-        return $data->fetch_assoc();
+        return $data->fetch_assoc();            
     }
 
     public function getArticleByUser(): array
     {
-        $name = $_GET['name']; 
-
+        $name = $_GET['name'];
+        //sql-fråga med innerjoin med kopplung unikt användarnamn. 
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $name . "' ORDER BY postade DESC;";
         $result = $this->db->query($sql);
 
@@ -81,7 +79,7 @@ class Article
 
     public function getArticles(): array
     {
-        //sqlfråga
+        //sqlfråga med innerjoing för samtliga artiklar för att få med namn m.m. 
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username ORDER BY postade DESC;";
         $alldata = mysqli_query($this->db, $sql);
 
@@ -90,7 +88,7 @@ class Article
 
     public function getArticlebyUsername($username): array
     {
-        //$username = $_SESSION['username'];
+        //sql-fråga med innerjoing via username(dvs inloggad)
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';";
 
         $alldata = mysqli_query($this->db, $sql);

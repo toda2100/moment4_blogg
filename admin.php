@@ -11,20 +11,20 @@ if (!isset($_SESSION['username'])) {
 
 <?php $page_title = "Login";
 
-include("includes/header.php"); ?>    
+include("includes/header.php"); ?>
 
 <h1>Skapa nytt inlägg</h1>
 <p>Skriv en artikel om Bodensee!</p>
 
-<?php                                //Utskrift av vem som är inloggad 
+<?php                                //Utskrift av vem som är inloggad via funktion. 
 
 if (isset($_SESSION['username'])) {
-$user = new Users();
-$username = $_SESSION['username'];
-$user = $user->getNameByUsername($username);
-echo "<p>Hej " . $user . "!</p>";
+    $user = new Users();                //hämta användarklass. 
+    $username = $_SESSION['username'];
+    $user = $user->getNameByUsername($username); 
+    echo "<p>Hej " . $user . "!</p>";
 } else {
-    echo "fel";
+    echo "Fel vid hämtning av ditt namn, sorry!";
 }
 ?>
 
@@ -53,7 +53,7 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     $title = strip_tags($title);    // rensa från htmlkod 
     $content = strip_tags($content, '<b><br><em>'); //$allowed_tags = ev. 
 
-    $success = true;    
+    $success = true;
 
     if (!$article->setTitle($title)) {          //funktion i klass för att sätta Titel. 
         $success = false;
@@ -68,7 +68,8 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
     if ($success) {
         if ($article->addArticle($title, $content, $username)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
             echo "<p class='correct'>Artikel tillagd</p>";
-            $title = ""; $content = "";
+            $title = "";
+            $content = "";
         } else {
             echo "<p class='error'>Fel vid lagring</p>";
         }
@@ -79,21 +80,21 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
 
 ?>
 
-<article class="formsarea">                     
+<article class="formsarea">
     <!-- formulär för input av innehållet och titel  -->
     <form method="post" action="admin.php">
         <label for="title">Titel</label><br>
-        <input class="area" type="text" name="title" id="title" value="<?= $title;?>"><br>
+        <input class="area" type="text" name="title" id="title" value="<?= $title; ?>"><br>
         <label for="content">Innehåll *</label><br>
-        <textarea class="textinput" type="text" name="content" id="content" value="<?= $content;?>"></textarea><br>   
-        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />   
+        <textarea class="textinput" type="text" name="content" id="content" value="<?= $content; ?>"></textarea><br>
+        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />
         <button class="btn" type="submit">Skapa nyhet</button>
     </form>
-    <p>* enbart < b >, < br > och < em > är tillåtna html-taggar i artikeln.</p>
+    <p>* enbart < b>, < br> och < em> är tillåtna html-taggar i artikeln.</p>
 </article>
 
 
-<?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista. //placeholder="Din nyhet!"
+<?php                                //koppling till klass och hämta artiklarna för utskrift i adminlista för inloggad användare. 
 $article = new Article();
 $article_list = $article->getArticlebyUsername($username);
 $username = $_SESSION['username'];
@@ -102,20 +103,17 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
 ?>
 
     <article>
-        <h3><?= $b['title']; ?></h3>           
-        <p><a href="admin.php?deleteid=<?= $b['id']; ?>">Radera inlägg</a></p>
-        <p><a href="edit.php?id=<?= $b['id']; ?>">Ändra inlägg</a></p>
+        <h3><?= $b['title']; ?></h3>
+        <p><a href="edit.php?id=<?= $b['id']; ?>">Ändra inlägg</a></p> <!-- för att komma till editera  -->
         <p><?= substr($b['content'], 0, 150); ?>...</p>
-        <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
+        <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>  <!-- för att kunna läsa hela  -->
+        <p><a href="admin.php?deleteid=<?= $b['id']; ?>">Radera inlägg</a></p> <!-- för att radera  -->
     </article>
 <?php
 }
-?> 
+?>
 
-<a class="logout" href="logout.php">Logga ut</a>     
+<a class="logout" href="logout.php">Logga ut</a>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
-
-
-

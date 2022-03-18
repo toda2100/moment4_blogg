@@ -15,87 +15,85 @@ include("includes/header.php"); ?>
 <p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
 
 <section>
-<?php
-$article = new Article();                       //hämta artiklar. 
-$article_list = $article->getArticles();
+    <?php
+    $article = new Article();                       //hämta artiklar. 
+    $article_list = $article->getArticles();
 
-if(count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
-    echo "<p class='error'>Inga artiklar är publicerade!</p>";
-} 
-                
-$article_list = array_slice($article_list, 0, 3);           // välj enbart de senaste i arrayen för att loopa till utskrift
+    if (count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+        echo "<p class='error'>Inga artiklar är publicerade!</p>";
+    }
 
-foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
+    $article_list = array_slice($article_list, 0, 3);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
-/* $date =  $a['postade'];
+    foreach ($article_list as $a) {                         //liten loop för de första i array. Skriver ut 300 tecken ca, samt läs mer.  
+
+        /* $date =  $a['postade'];
 $myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i');  */
+$newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används */
 
-?>
-    <article>
+    ?>
+        <article>
 
-        <h3><?= $a['title']; ?></h3>                    
-        <p><?= substr($a['content'], 0, 300); ?>...</p>
-        <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
-        <p><b>Publicerad: </b><?= $a['postade']; ?></p> 
-        <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
-   
-    </article>
+            <h3><?= $a['title']; ?></h3>
+            <p><?= substr($a['content'], 0, 300); ?>...</p>
+            <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
+            <p><b>Publicerad: </b><?= $a['postade']; ?></p>
+            <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
 
-<?php
-}
-?>
+        </article>
 
-<button id='open' onclick.function()>Se fler artiklar</button>
+    <?php
+    }
+    ?>
 
-<div id="element">
-<?php
-$article = new Article();                       //hämta artiklar. 
-$article_list = $article->getArticles();
+    <button id='open' onclick.function()>Se fler artiklar</button>  <!-- JS funktion för att visa fler artiklar -->
 
-if(count($article_list) < 5) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
-    echo "<p class='error'>Inga fler artiklar finns att visa.</p>";
-} 
-                
-$article_list = array_slice($article_list, 3, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
+    <div id="element">
+        <?php
+        $article = new Article();                       //hämta artiklar. 
+        $article_list = $article->getArticles();
 
-foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
+        if (count($article_list) < 5) {                 //kolla så listan inte är tom för att visa övriga artiklar 
+            echo "<p class='error'>Inga fler artiklar finns att visa.</p>";
+        }
 
-/* $date =  $a['postade'];
-$myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i'); 
-<p><b>Publicerad: </b><?= $newDate; ?></p>*/
+        $article_list = array_slice($article_list, 3, 10);           // väljer vidare max till 10 av arrayen. 
 
-?>
+        foreach ($article_list as $a) {                         // Skriver ut 300 tecken ca, samt läs mer.  
 
-    <article>
-        <h3><?= $a['title']; ?></h3>                    
-        <p><?= substr($a['content'], 0, 300); ?>...</p>
-        <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
-        <p><b>Publicerad: </b><?= $a['postade']; ?></p> 
-        <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
-    </article>
-    
+        ?>
 
-<?php
-}
-?>
-</div>
+            <article>
+                <h3><?= $a['title']; ?></h3>
+                <p><?= substr($a['content'], 0, 300); ?>...</p>
+                <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
+                <p><b>Publicerad: </b><?= $a['postade']; ?></p>
+                <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
+            </article>
 
-<a href="articles.php" id="all" >Se alla artiklar</a>
-<noscript><a href="articles.php">Se alla artiklar</a></noscript>
+
+        <?php
+        }
+        ?>
+    </div>
+
+    <a href="articles.php" id="all">Se alla artiklar</a>
+    <noscript><a href="articles.php">Se alla artiklar</a></noscript>   <!-- om JS ej installerat -->
 
 </section>
 
-<script>document.getElementById("element").style.display = "none";
-document.getElementById("all").style.display = "none";</script>
-<script>let open = document.getElementById('open');
-open.onclick = function() {
-    document.getElementById('element').style.display = 'block';
-    document.getElementById('open').style.display = "none";
-    document.getElementById('all').style.display = "block";
-} </script> 
+<script>
+    document.getElementById("element").style.display = "none";      //hämta via ID för själva div. 
+    document.getElementById("all").style.display = "none";
+</script>
+<script>
+    let open = document.getElementById('open');
+    open.onclick = function() {                 //funktion körs för att dölja och ta bort knappar vid klick på att visa mer. 
+        document.getElementById('element').style.display = 'block';
+        document.getElementById('open').style.display = "none";
+        document.getElementById('all').style.display = "block";
+    }
+</script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
-

@@ -21,7 +21,7 @@ class Users
     // ny användare
     public function registerUser($username, $password, $name)
     {
-        if (!$this->setUsername($username)) return false;
+        if (!$this->setUsername($username)) return false;                   //hämta från set. 
         if (!$this->setPassword($password)) return false;
         if (!$this->setName($name)) return false;
 
@@ -38,13 +38,13 @@ class Users
     }
 
     // logga in användare som finns 
-    function login($username, $password)  
+    function login($username, $password)
     {
 
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
 
-        $sql = "SELECT * FROM users WHERE username='$username';";           
+        $sql = "SELECT * FROM users WHERE username='$username';";           //sql-frågan
         $result = $this->db->query($sql);
 
         if ($result->num_rows > 0) {  //får vi någon respons så starta session
@@ -52,9 +52,9 @@ class Users
             $row = $result->fetch_assoc();
             $stored_password = $row['password'];
 
-            if (password_verify($password, $stored_password)) {
+            if (password_verify($password, $stored_password)) {             //verifera lösen. 
 
-                $_SESSION['username'] = $username;  
+                $_SESSION['username'] = $username;          //starta session om ok. 
                 return true;
             } else {
                 return false;
@@ -67,21 +67,21 @@ class Users
     //kolla om användarnamnet finns 
     public function usernameExists($username)
     {
-        $username = $this->db->real_escape_string($username);
+        $username = $this->db->real_escape_string($username);       
 
-        $sql = "SELECT username FROM users WHERE username= '$username';";
+        $sql = "SELECT username FROM users WHERE username= '$username';";  //jämför via frågan. 
 
         $result = $this->db->query($sql);
 
-        if ($result->num_rows > 0) {  //får vi någon respons så finns användarnamnet 
+        if ($result->num_rows > 0) {  //får vi någon respons så finns användarnamnet dvs false
             return true;
         } else {
             return false;
         }
     }
 
-   //Get user by id
-    public function getNameById(int $id): string
+    //Get user  via id
+    public function getNameById(int $id): string            
     {
         $sql = "SELECT name FROM users WHERE id=$id;";
         $result = $this->db->query($sql);
@@ -90,34 +90,37 @@ class Users
         return $row['name'];
     }
 
-   public function getNameByUsername($username): string    //
+    //Get user via username
+    public function getNameByUsername($username): string    //
     {
         //$username = $_SESSION['username'];
-        $sql ="SELECT name FROM users WHERE username='$username';"; 
+        $sql = "SELECT name FROM users WHERE username='$username';";
         $result = $this->db->query($sql);
         $row = $result->fetch_assoc();
 
-        return $row['name']; 
-    }    
+        return $row['name'];
+    }
 
-    function getUsersByName(){
+    //Get user via name
+    function getUsersByName()
+    {
         $sql = "SELECT name FROM users ORDER BY username ASC";
         $result = $this->db->query($sql);
-        
+
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
-        
     }
 
-    public function getUsers(): array   
-    {  //alla  
-        $sql = "SELECT users.name, users.id, articles.title, articles.id, articles.content, articles.postade FROM users INNER JOIN articles ON users.username=articles.username ORDER BY name ASC"; 
+    //Get alla Users 
+    public function getUsers(): array
+    {  //alla, SQL med join till artiklar samt i viss ordning 
+        $sql = "SELECT users.name, users.id, articles.title, articles.id, articles.content, articles.postade FROM users INNER JOIN articles ON users.username=articles.username ORDER BY name ASC";
 
         $result = $this->db->query($sql);
 
-        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
-    // set för user/pass och name. 
+    // Sets för user/pass och name. 
     function setUsername(string $username): bool
     {
 
