@@ -88,9 +88,8 @@ class Article
 
     public function getArticlebyUsername($username): array
     {
-        //sql-fråga med innerjoing via username(dvs inloggad)
+        //sql-fråga med innerjoing via username
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';";
-
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);

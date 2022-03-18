@@ -25,9 +25,8 @@ include("includes/header.php");
 <article>
     <h2><?= $thearticle['title']; ?></h2>
     <p><?= $thearticle['content']; ?></p>
-    <p>Publicerad: <?= $thearticle['postade']; ?></p>
-    <p>Skriven av: <?= $name ?></p>
-
+    <p><b>Publicerad: </b><?= $thearticle['postade']; ?></p>
+    <p>Skriven av: <a href="blogger.php?name=<?= $name ?>"><?= $name; ?></a></p>
 </article>
 
 <h3>Fler artiklar från <?= $name ?></h3>   
@@ -49,7 +48,6 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
         <h3><?= $b['title']; ?></h3>
         <p><?= substr($b['content'], 0, 50); ?>...</p>
         <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
-        <p>Skriven av: <?= $name ?></p>
     </article>
 
 <?php
