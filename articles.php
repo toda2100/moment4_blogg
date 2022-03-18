@@ -6,7 +6,7 @@
 <?php $page_title = "Artiklar";
 include("includes/header.php"); ?>
 
-<h1>Alla artiklar</h1>
+<h2>Alla artiklar</h2>
 <p>Här hittar du alla artiklar från samtliga bloggarna. Klicka för att läsa mer.</p>
 <img src="images/head.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
 

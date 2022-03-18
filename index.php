@@ -11,10 +11,9 @@ include("includes/header.php"); ?>
 
 <img src="images/about.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
 
+<section>
 <h2>Senaste inläggen</h2>
 <p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
-
-<section>
     <?php
     $article = new Article();                       //hämta artiklar. 
     $article_list = $article->getArticles();
@@ -26,10 +25,6 @@ include("includes/header.php"); ?>
     $article_list = array_slice($article_list, 0, 3);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
     foreach ($article_list as $a) {                         //liten loop för de första i array. Skriver ut 300 tecken ca, samt läs mer.  
-
-        /* $date =  $a['postade'];
-$myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
-$newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används */
 
     ?>
         <article>
@@ -46,7 +41,7 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
     }
     ?>
 
-  <button id='open' onclick.function()>Se fler artiklar</button>  
+  <button id='open' onclick>Se fler artiklar</button>  
     
     <div id="element">
         <?php

@@ -10,7 +10,7 @@ include("includes/header.php"); ?>
 $article = new Article();
 $article_list = $article->getArticleByUser('name');
 $name = $_GET['name'];
-echo "<h1>Alla artiklar av " . $name . "</h1>";  //namn hämtas för rubrik
+echo "<h2>Alla artiklar av " . $name . "</h2>";  //namn hämtas för rubrik
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>

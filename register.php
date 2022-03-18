@@ -73,13 +73,13 @@ if (isset($message2)) {
     <form method="post" action="register.php">
 
         <label for="username">Användarnamn</label><br>
-        <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!"><br>
+        <input class="area" type="text" name="username" id="username" placeholder="Används till inloggning!"><br>
         <label for="password">Lösenord</label><br>
         <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!"><br>
         <label for="firstname">Förnamn</label><br>
-        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken!"><br>
+        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken, inga mellanslag!"><br>
         <label for="lastname">Efternamn</label><br>
-        <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken!"><br>
+        <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken, inga mellanslag!"><br>
         <div>
             <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()"> <!-- disbaled, öppnas med javascript -->
             <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>
