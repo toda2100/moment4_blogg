@@ -7,7 +7,7 @@
 include("includes/header.php"); ?>
 
 <h1>Senaste inläggen</h1>
-<p>Klicka för alla läsa mer eller se alla artiklar under fliken artiklar</p>
+<p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
 
 <section>
 <?php
@@ -36,6 +36,8 @@ foreach ($article_list as $a) {                         //liten loop för de tv�
 <?php
 }
 ?>
+
+<a href="articles.php">Se alla artiklar</a>
 
 </section>
 

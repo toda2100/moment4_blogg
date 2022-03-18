@@ -24,14 +24,7 @@ class Article
     public function addArticle(string $title, string $content, string $username): bool  
     {
 
-/*     function formatField($input)
-{
-    $input = strip_tags($input);
-    $input = mysql_real_escape_string($input);
-    return trim($input);
-} */
-
-        $username = $_SESSION['username'];  //skicka med vem som är användare. Måste den set? 
+        $username = $_SESSION['username'];  //skicka med vem som är användare. 
         //kolla sets
         if (!$this->setTitle($title)) return false;
         if (!$this->setContent($content)) return false;
@@ -39,7 +32,6 @@ class Article
         //sql fråga in i db
         
         $sql = "INSERT INTO articles(title, content, username)VALUES('" . $this->title . "','" . $this->content . "','" . $username . "');";
-        //$sql = "INSERT INTO articles(title, content, username)VALUES('" . $this->title . "', '" . $this->content . "', '" . $_SESSION['username'] . "' );";
 
         // skicka med retur
 
@@ -68,8 +60,7 @@ class Article
         return $data->fetch_assoc();
     }
 
-    public function getArticleByUser(){
-        //$sql = "SELECT * FROM articles WHERE username='" . $_GET['userid'] . "' ORDER BY date DESC";  
+    public function getArticleByUser() : array { 
         
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;"; 
         $result = $this->db->query($sql);
@@ -81,14 +72,12 @@ class Article
     public function getArticles(): array
     {
         //sqlfråga
-        //$sql = "SELECT * FROM articles ORDER BY postade DESC;"; //fråga utan innerjoin för ev utskrift utan namn.
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username;";
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username ORDER BY postade DESC;";
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
     }
 
-//
     public function getArticlebyUsername($username): array  
     {
         $username = $_SESSION['username'];
@@ -103,9 +92,6 @@ class Article
          $result = $this->db->query($sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC); 
     }   
-//
-
-
 
     //ta bort article 
     public function deleteArticle(int $id): bool

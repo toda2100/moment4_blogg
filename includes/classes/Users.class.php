@@ -44,7 +44,7 @@ class Users
         $username = $this->db->real_escape_string($username);               //tvätta sql för att minska riskt för injections. 
         $password = $this->db->real_escape_string($password);
 
-        $sql = "SELECT * FROM users WHERE username='$username';";           //hämta även namn?? lägg till upptill och sen är session lika med namn?
+        $sql = "SELECT * FROM users WHERE username='$username';";           
         $result = $this->db->query($sql);
 
         if ($result->num_rows > 0) {  //får vi någon respons så starta session
@@ -80,14 +80,6 @@ class Users
         }
     }
 
-       /* public function getNameById(int $id): array
-    {
-        $id = intval($id);
-        $sql = "SELECT * FROM articles WHERE id=$id;";
-        $data = mysqli_query($this->db, $sql);
-        return $data->fetch_assoc();
-    } */
-
    //Get user by id
     public function getNameById(int $id): string
     {
@@ -101,7 +93,6 @@ class Users
    public function getNameByUsername($username): string    //KÖR DEN OCH SKRIV UT SESSION? IF OSV 
     {
         $username = $_SESSION['username'];
-        //$sql = "SELECT name FROM users WHERE ['username']=$username;";
         $sql ="SELECT name FROM users WHERE username='$username';"; 
         $result = $this->db->query($sql);
         $row = $result->fetch_assoc();
@@ -117,14 +108,8 @@ class Users
         
     }
 
-   /*  public function getName(): string
-    {    //vid behov
-        return $this->name;
-    } */
-
     public function getUsers(): array   
-    {  //alla 
-        //$sql = "SELECT * FROM users ORDER BY name ASC";   //vad händer om de inte har skrivit artikel? 
+    {  //alla  
         $sql = "SELECT users.name, users.id, articles.title, articles.id, articles.content, articles.postade FROM users INNER JOIN articles ON users.username=articles.username ORDER BY name ASC"; 
 
         $result = $this->db->query($sql);

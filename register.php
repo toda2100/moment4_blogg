@@ -67,7 +67,6 @@ if (isset($message)) {
         <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!" required><br>
         <label for="password">Lösenord</label><br>
         <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!" required><br>
-
         <label for="firstname">Förnamn</label><br>
         <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken!" required><br>
         <!-- <label for="lastname">Efternamn</label><br>

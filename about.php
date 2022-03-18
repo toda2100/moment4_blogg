@@ -7,7 +7,7 @@
 include("includes/header.php"); ?>
 
 <h1>Om webbplatsen</h1>
-<p>Mer om...</p>
+<p>Webbplatsen är framtagen under utbildningen Webbutvekling på Mittuniversitetet.</p>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
