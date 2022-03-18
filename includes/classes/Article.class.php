@@ -80,17 +80,13 @@ class Article
 
     public function getArticlebyUsername($username): array  
     {
-        $username = $_SESSION['username'];
-        //$sql ="SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE username='$username';"; 
-        
+        $username = $_SESSION['username'];        
         $sql = "SELECT articles.id, articles.title, articles.content, articles.postade FROM articles WHERE username='$username';"; 
 
         $alldata = mysqli_query($this->db, $sql);
 
         return mysqli_fetch_all($alldata, MYSQLI_ASSOC);
 
-         $result = $this->db->query($sql);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC); 
     }   
 
     //ta bort article 

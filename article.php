@@ -24,10 +24,39 @@ include("includes/header.php");
 <p>Publicerad: <?=$thearticle['postade'];?></p>
 
 </article>
+
+<h3>Fler artiklar från samma bloggare</h3>
+
 <?php 
+//$article = new Article();
+$username = $thearticle['username'];
+$article_list = $article->getArticlebyUsername($username);
+
+if(count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+    echo "<p class='error'>Inga artiklar är publicerade!</p>";
+} 
+
+$article_list = array_slice($article_list, 0, 3);  
+
+foreach ($article_list as $b) {                 //rulla igenom hela array skriv ut nedan, med länk för att radera, begränsat med innehåll, samt läs mer. 
+?>
+
+    <article>
+        <h3><?= $b['title']; ?></h3>           
+        <p><?= substr($b['content'], 0, 50); ?>...</p>
+        <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>
+    </article>
+<?php
+}
+?> 
+
+<?php 
+
 $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
 echo "<a href='$back'>Föregående sida</a>";
 ?>
+
+
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

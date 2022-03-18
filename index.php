@@ -6,7 +6,12 @@
 <?php $page_title = "Startsida";
 include("includes/header.php"); ?>
 
-<h1>Senaste inläggen</h1>
+<h1>Välkommen till södra Tyskland!</h1>
+<p>Här kan du hitta eller dela med dig av tips på upplevelser, sevärdheter eller andra tips runt Bodensee, Bodensjön, i södra Tyskland.</a></p>
+
+<img src="images/head.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
+
+<h2>Senaste inläggen</h2>
 <p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
 
 <section>
@@ -18,7 +23,7 @@ if(count($article_list) == 0) {                 //kolla så listan inte är tom.
     echo "<p class='error'>Inga artiklar är publicerade!</p>";
 } 
                 
-$article_list = array_slice($article_list, 0, 5);           // välj enbart de senaste i arrayen för att loopa till utskrift
+$article_list = array_slice($article_list, 0, 3);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
@@ -52,7 +57,7 @@ if(count($article_list) < 5) {                 //kolla så listan inte är tom. 
     echo "<p class='error'>Inga artiklar går att visa!</p>";
 } 
                 
-$article_list = array_slice($article_list, 6, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
+$article_list = array_slice($article_list, 4, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
