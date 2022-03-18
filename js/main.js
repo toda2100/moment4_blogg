@@ -1,3 +1,4 @@
+    
     document.getElementById("element").style.display = "none";      //hämta via ID för själva div. 
     document.getElementById("all").style.display = "none"; 
   

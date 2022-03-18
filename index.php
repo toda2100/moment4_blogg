@@ -13,6 +13,7 @@ include("includes/header.php"); ?>
 
 <section>
 <h2>Senaste inläggen</h2>
+
 <p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
     <?php
     $article = new Article();                       //hämta artiklar. 
@@ -41,7 +42,7 @@ include("includes/header.php"); ?>
     }
     ?>
 
-  <button id='open' onclick()>Se fler artiklar</button>  
+  <button id='open' onclick>Se fler artiklar</button>  
     
     <div id="element">
         <?php
@@ -65,7 +66,6 @@ include("includes/header.php"); ?>
                 <p><b>Publicerad: </b><?= $a['postade']; ?></p>
                 <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name'] . " " . $a['lastname']; ?></a></p>
             </article>
-
 
         <?php
         }
