@@ -10,37 +10,36 @@ if (isset($_POST['username'])) {   //kolla finns något i input
     $password = $_POST['password'];
     $name = $_POST['firstname'];
 
+    $success = true; //start, går vidare om sant. Annars felmeddelanden. 
+
     if ($users->usernameExists($username)) {                    //kolla om användarnamn är taget. 
+        $success = false;
         $message = "<p class='error'>Användarnamn finns redan</p>";
-    } else {
+    }
 
-        //start, går vidare om sant. Annars felmeddelanden. 
-        $success = true;
+    if (!$users->setUsername($username)) {          //funktion i klass för att sätta Titel. 
+        $success = false;
+        $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
+    }
 
-        if (!$users->setUsername($username)) {          //funktion i klass för att sätta Titel. 
-            $success = false;
-            $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
-        }
+    if (!$users->setPassword($password)) {           //funktion i klass för att sätta innehållet. 
+        $success = false;
+        $message =  "<p class='error'>Ange lösenord med minst 5 tecken</p>";
+    }
 
-        if (!$users->setPassword($password)) {           //funktion i klass för att sätta innehållet. 
-            $success = false;
-            $message =  "<p class='error'>Ange lösenord med minst 5 tecken</p>";
-        }
+    if (!$users->setName($name)) {           //funktion i klass för att sätta innehållet. 
+        $success = false;
+        $message =  "<p class='error'>Ange förnamn med minst 5 tecken och inga mellanslag</p>";
+    }
 
-        if (!$users->setName($name)) {           //funktion i klass för att sätta innehållet. 
-            $success = false;
-            $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
-        }
-
-        if ($success) {
-            if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
-                $message =  "<p class='correct'>Användare tillagd, <a href='login.php'>logga in här!</a></p>";
-            } else {
-                $message =  "<p class='error'>Fel vid lagring</p>";
-            }
+    if ($success) {
+        if ($users->registerUser($username, $password, $name)) {    //funktion i klass för att lägga till informationen. med felmeddelanden. 
+            $message =  "<p class='correct'>Användare tillagd, <a href='login.php'>logga in här!</a></p>";
         } else {
-            $message =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
+            $message =  "<p class='error'>Fel vid lagring</p>";
         }
+    } else {
+        $message2 =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
     }
 }
 ?>
@@ -53,8 +52,10 @@ if (isset($_POST['username'])) {   //kolla finns något i input
 
 <?php
 if (isset($message)) {
-    echo $message;
-} //skriv ut meddelanden ovan vid fel 
+    echo $message . $message2;
+} 
+
+//skriv ut meddelanden ovan vid fel 
 ?>
 
 <article class="formsarea">
@@ -62,16 +63,16 @@ if (isset($message)) {
     <form method="post" action="register.php">
 
         <label for="username">Användarnamn</label><br>
-        <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!" required><br>
+        <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!"><br>
         <label for="password">Lösenord</label><br>
-        <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!" required><br>
+        <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!"><br>
         <label for="firstname">Förnamn</label><br>
-        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken!" required><br>
+        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken!"><br>
         <!-- <label for="lastname">Efternamn</label><br>
         <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken!"><br>
          -->
         <div>
-            <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()">  <!-- disbaled, öppnas med javascript -->
+            <input class=checkbox type="checkbox" id="approve" name="approve" onchange="approve()"> <!-- disbaled, öppnas med javascript -->
             <label class=check for="approve">Godkänner att mina uppgifter lagras!</label>
             <button class="btn" type="submit" id="submituser" disabled>Skapa bloggare</button>
         </div>

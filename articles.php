@@ -22,7 +22,7 @@ foreach ($article_list as $a) {             //loopa hela listan för utskrift ne
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs hela artikeln</a></p>
         <p><b>Publicerad: </b><?= $a['postade']; ?></p>
-        <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
+        <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name']; ?></a></p>
 
     </article>
 <?php

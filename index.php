@@ -6,8 +6,8 @@
 <?php $page_title = "Startsida";
 include("includes/header.php"); ?>
 
-<h1>Välkommen till södra Tyskland!</h1>
-<p>Här kan du hitta eller dela med dig av tips på upplevelser, sevärdheter eller andra tips runt Bodensee, Bodensjön, i södra Tyskland.</a></p>
+<h2>Välkommen till södra Tyskland!</h2>
+<p>Här kan du hitta eller dela med dig av tips på upplevelser, sevärdheter eller andra tips runt Bodensee, Bodensjön, i södra Tyskland.</p>
 
 <img src="images/about.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
 
@@ -38,7 +38,7 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
             <p><?= substr($a['content'], 0, 300); ?>...</p>
             <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
             <p><b>Publicerad: </b><?= $a['postade']; ?></p>
-            <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
+            <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name']; ?></a></p>
 
         </article>
 
@@ -46,8 +46,8 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
     }
     ?>
 
-    <button id='open' onclick.function()>Se fler artiklar</button>  <!-- JS funktion för att visa fler artiklar -->
-
+  <button id='open' onclick.function()>Se fler artiklar</button>  
+    
     <div id="element">
         <?php
         $article = new Article();                       //hämta artiklar. 
@@ -68,7 +68,7 @@ $newDate = $myDateTime->format('y-m-d h:i'); datumförvandling som ej används *
                 <p><?= substr($a['content'], 0, 300); ?>...</p>
                 <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
                 <p><b>Publicerad: </b><?= $a['postade']; ?></p>
-                <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
+                <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"><?= $a['name']; ?></a></p>
             </article>
 
 

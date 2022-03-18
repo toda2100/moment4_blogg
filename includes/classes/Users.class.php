@@ -144,7 +144,7 @@ class Users
     function setName(string $name): bool
     {
 
-        if (strlen($name) > 4) { //innehåller minst 5 tecken
+        if (strlen($name) > 4 && !strrpos($name, ' ')) { //innehåller minst 5 tecken och inga mellanslag!
             $this->name = $name;
             return true;
         }
