@@ -71,8 +71,9 @@ class Article
 
     public function getArticleByUser(): array
     {
+        $name = $_GET['name']; 
 
-        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $_GET['name'] . "' ORDER BY postade DESC;";
+        $sql = "SELECT articles.id, articles.title, articles.content, articles.postade, users.name FROM articles INNER JOIN users ON articles.username=users.username WHERE name='" . $name . "' ORDER BY postade DESC;";
         $result = $this->db->query($sql);
 
         return mysqli_fetch_all($result, MYSQLI_ASSOC);

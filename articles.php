@@ -7,8 +7,8 @@
 include("includes/header.php"); ?>
 
 <h1>Alla artiklar</h1>
-<p>Klicka för att läsa hela artikeln.</p>
-
+<p>Här hittar du alla artiklar från samtliga bloggarna. Klicka för att läsa mer.</p>
+<img src="images/head.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
 
 <?php                               //hämta lista via klassfunktion
 $article = new Article();

@@ -9,6 +9,8 @@
     echo "<p>Kontakt <a href= 'mailto:$email'> $email</a></p>";
     ?>
 
+    <a href="about.php">Om webbplatsen</a>
+    
     <?php                   //visa olika om inloggad eller inte. 
     if (!isset($_SESSION['username']) && empty($_SESSION['username'])) {
         echo '<a href="login.php"><b>Logga in</b></a>';
@@ -18,10 +20,11 @@
 
     ?>
 
+
 </footer><!-- /mainfooter -->
 </div><!-- /container -->
 
-<!-- <script src="js/main.js"></script> körs bara på registersidan för att undvika felmeddelanden. -->  
+<!-- <script src="js/main.js"></script> körs bara på registersidan för att undvika felmeddelanden. -->
 </body>
 
 </html>

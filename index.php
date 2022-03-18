@@ -9,7 +9,7 @@ include("includes/header.php"); ?>
 <h1>Välkommen till södra Tyskland!</h1>
 <p>Här kan du hitta eller dela med dig av tips på upplevelser, sevärdheter eller andra tips runt Bodensee, Bodensjön, i södra Tyskland.</a></p>
 
-<img src="images/head.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
+<img src="images/about.jpg" class="mainimage" alt="Vacker vy vid Bodensjön Tyskland">
 
 <h2>Senaste inläggen</h2>
 <p>Klicka för att läsa mer eller se alla inlägg under fliken <a href="articles.php">artiklar.</a></p>
