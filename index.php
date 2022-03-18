@@ -22,11 +22,15 @@ $article_list = array_slice($article_list, 0, 5);           // välj enbart de s
 
 foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
 
+$date =  $a['postade'];
+$myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
+$newDate = $myDateTime->format('y-m-d h:i');
+
 ?>
     <article>
 
         <h3><?= $a['title']; ?></h3>                    
-        <p><b>Publicerad: </b><?= $a['postade']; ?></p>
+        <p><b>Publicerad: </b><?= $newDate; ?></p>
         <p><?= substr($a['content'], 0, 300); ?>...</p>
         <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
         <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
@@ -37,9 +41,55 @@ foreach ($article_list as $a) {                         //liten loop för de tv�
 }
 ?>
 
-<a href="articles.php">Se alla artiklar</a>
+<button id='open' onclick.function()>Se fler artiklar</button>
+
+<div id="element">
+<?php
+$article = new Article();                       //hämta artiklar. 
+$article_list = $article->getArticles();
+
+if(count($article_list) < 5) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+    echo "<p class='error'>Inga artiklar går att visa!</p>";
+} 
+                
+$article_list = array_slice($article_list, 6, 10);           // välj enbart de senaste i arrayen för att loopa till utskrift
+
+foreach ($article_list as $a) {                         //liten loop för de två. Skriver ut 300 tecken ca, samt läs mer.  
+
+$date =  $a['postade'];
+$myDateTime = DateTime::createFromFormat('Y-m-d h:i:s', $date);
+$newDate = $myDateTime->format('y-m-d h:i');
+
+?>
+
+    <article>
+        <h3><?= $a['title']; ?></h3>                    
+        <p><b>Publicerad: </b><?= $newDate; ?></p>
+        <p><?= substr($a['content'], 0, 300); ?>...</p>
+        <p><a href="article.php?id=<?= $a['id']; ?>">Läs mer</a></p>
+        <p>Av: <a href="blogger.php?name=<?= $a['name']; ?>"></b><?= $a['name']; ?></a></p>
+    </article>
+    
+
+<?php
+}
+?>
+</div>
+
+<a href="articles.php" id="all" >Se alla artiklar</a>
 
 </section>
+
+<script>document.getElementById("element").style.display = "none";
+document.getElementById("all").style.display = "none";</script>
+<script>let open = document.getElementById('open');
+open.onclick = function() {
+    document.getElementById('element').style.display = 'block';
+    document.getElementById('open').style.display = "none";
+    document.getElementById('all').style.display = "block";
+
+    //if javas not enabled? show? 
+} </script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

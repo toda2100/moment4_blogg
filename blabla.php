@@ -15,3 +15,6 @@ foreach ($article_list as $a) {                 //rulla igenom hela array skriv 
 <?php
 }
 ?> 
+
+
+<!-- <p><b>Publicerad: </b><?= $a['postade']; ?></p> -->

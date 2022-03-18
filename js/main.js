@@ -4,5 +4,9 @@ approve.onchange = function() {
   submituser.disabled = !this.checked;
 };
 
-// ev bara köra den här på Register-sidan för att undvika felmeddelande. 
+// ev bara köra den här på Register-sidan för att undvika felmeddelande. If Javascript not enabled? 
+
+
+
+
 
