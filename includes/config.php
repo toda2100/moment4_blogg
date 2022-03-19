@@ -6,7 +6,7 @@
 ?>
 
 <?php
-    $site_title = "Min webbplats";
+    $site_title = "Livet vid Bodensee";
     $divider = " | ";
     
 session_start(); //starta session
