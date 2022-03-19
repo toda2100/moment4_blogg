@@ -57,14 +57,13 @@ if (isset($_GET['id'])) {
 
 include("includes/header.php"); ?>
 
-<h1>Ändra inlägg <?= $articleinfo['title'] ?></h1>   <!-- Hämtar info från sparad artikel -->
+<h2>Ändra inlägg <?= $articleinfo['title'] ?></h2>   <!-- Hämtar info från sparad artikel -->
 <p>Gör ändringar och spara på nytt.</p>
 
 <?php
 if (isset($message)) {
     echo $message;
 }
-
 ?>
 
 <article class="formsarea">
@@ -73,11 +72,17 @@ if (isset($message)) {
         <label for="title">Titel</label><br>
          <input class="area" type="text" name="title" id="title" value="<?= $articleinfo['title']; ?>"><br>  <!-- Hämtar info från sparad artikel -->
         <label for="content">Innehåll</label><br>
-        <textarea class="textinput" type="text" name="content" id="content"><?= $articleinfo['content']; ?></textarea><br> <!-- Hämtar info från sparad artikel -->
+        <textarea class="textinput" name="content" id="content"><?= $articleinfo['content']; ?></textarea><br> <!-- Hämtar info från sparad artikel -->
         <button class="btn" type="submit">Bekräfta ändring</button>
     </form>
-    <p>* enbart < b>, < br> och < em> är tillåtna html-taggar i artikeln.</p>
+    <p>* enbart b, br och em är tillåtna html-taggar i artikeln.</p>
 </article>
+
+<?php
+
+$back = htmlspecialchars($_SERVER['HTTP_REFERER']);  //skickar tillbaka till föregående sida. 
+echo "<a href='$back'>Tillbaka</a>";
+?>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

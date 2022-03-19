@@ -39,9 +39,13 @@ if (isset($message)) {
         <input class="area" type="text" name="username" id="username" placeholder="Minst 5 tecken!"><br>
         <label for="password">Lösenord</label><br>
         <input class="area" type="password" name="password" id="password" placeholder="Minst 5 tecken!"><br>
-        <button class="btn" type="submit">Logga in</button>
+        <button class="btn" type="submit" onclick="loginOk()">Logga in</button>
     </form>
 </article>
+
+<script>function loginOk() {
+  alert("När du är inloggad använder vi en inloggnings-session för att förbättra din upplevelse.");
+} </script> 
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

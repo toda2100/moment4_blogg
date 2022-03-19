@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])) {
 
 include("includes/header.php"); ?>
 
-<h1>Skapa nytt inlägg</h1>
+<h2>Skapa nytt inlägg</h2>
 <p>Skriv en artikel om Bodensee!</p>
 
 <?php                                //Utskrift av vem som är inloggad via funktion. 
@@ -35,7 +35,7 @@ $article = new Article();           //hämta klass
 $title = "";
 $content = "";
 
-if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta på deleteid - kör klassfunktion deletearticle
+if (isset($_GET['deleteid'])) {            //vid borttagning av inlägg. Hämta på deleteid - kör klassfunktion deletearticle    
     $id = intval($_GET['deleteid']);
 
     if ($article->deleteArticle($id)) {
@@ -44,6 +44,7 @@ if (isset($_GET['deleteid'])) {             //vid borttagning av inlägg. Hämta
         echo "<p class='error'>Fel vid radering</p>";
     }
 }
+
 
 if (isset($_POST['title'])) {                       //hämta från inputfält 
     $title = $_POST['title'];
@@ -86,11 +87,11 @@ if (isset($_POST['title'])) {                       //hämta från inputfält
         <label for="title">Titel</label><br>
         <input class="area" type="text" name="title" id="title" value="<?= $title; ?>"><br>
         <label for="content">Innehåll *</label><br>
-        <textarea class="textinput" type="text" name="content" id="content" value="<?= $content; ?>"></textarea><br>
-        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>" readonly />
+        <textarea class="textinput" name="content" id="content"><?= $content; ?></textarea><br>
+        <input type="hidden" name="user" id="user" value="<?php echo $_SESSION['username'] ?>"/>
         <button class="btn" type="submit">Skapa nyhet</button>
     </form>
-    <p>* enbart < b>, < br> och < em> är tillåtna html-taggar i artikeln.</p>
+    <p>* enbart b, br och em är tillåtna html-taggar i artikeln.</p>
 </article>
 
 
@@ -107,13 +108,23 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
         <p><a href="edit.php?id=<?= $b['id']; ?>">Ändra inlägg</a></p> <!-- för att komma till editera  -->
         <p><?= substr($b['content'], 0, 150); ?>...</p>
         <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>  <!-- för att kunna läsa hela  -->
-        <p><a href="admin.php?deleteid=<?= $b['id']; ?>">Radera inlägg</a></p> <!-- för att radera  -->
+        <p><a href="admin.php?deleteid=<?= $b['id']; ?>" onclick="conDel()">Radera inlägg</a></p> <!-- för att radera  -->
     </article>
 <?php
 }
 ?>
 
 <a class="logout" href="logout.php">Logga ut</a>
+
+<script>function conDel(){
+    if(confirm("Är du säker att du vill radera?") === true){
+        return true;
+    }else{
+        return false;
+   }
+ } </script> 
+
+
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
