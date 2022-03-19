@@ -1,4 +1,9 @@
-<!-- sektionsfil för sidomeny för bloggprojekt Tobias Dahlberg 2022 -->
+<?php 
+/*
+* Skapad av: Tobias Dahlberg
+* sektionsfil för sidomeny bloggprojekt
+*/
+?>
 
 </section><!-- /leftcontent -->
 

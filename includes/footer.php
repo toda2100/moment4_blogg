@@ -1,4 +1,9 @@
-<!-- sektionsfil för footer för bloggprojekt Tobias Dahlberg 2022 -->
+<?php 
+/*
+* Skapad av: Tobias Dahlberg
+* sektionsfil för footer bloggprojekt
+*/
+?>
 
 <footer class="mainfooter">
     <p>Webbplatsen är framtagen under kursen Webbutveckling 2 vid Mittuniversitetet</p>

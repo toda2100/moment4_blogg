@@ -1,4 +1,9 @@
-<!-- sida för editera bloggprojekt Tobias Dahlberg 2022 -->
+<?php 
+/*
+* Skapad av: Tobias Dahlberg
+* Sida för edit artiklar för bloggprojekt
+*/
+?>
 
 <?php include("includes/config.php"); ?>
 <!-- inkluderar konfiguartionsfil till header/varje sida -->

@@ -1,4 +1,9 @@
-<!-- konfigfil för bloggprojekt Tobias Dahlberg 2022 -->
+<?php 
+/*
+* Skapad av: Tobias Dahlberg
+* konfigfil för huvudmeny bloggprojekt
+*/
+?>
 
 <?php
     $site_title = "Min webbplats";
@@ -27,12 +32,12 @@ ini_set("display_errors", 1);
     define("DBUSER", "root");    //"root"
     define("DBPASS", "");          // ""
     define("DBDATABASE", "bloggdb");
-} else {
-    /* define("DBHOST", "studentmysql.miun.se");
+/* } else {
+    define("DBHOST", "studentmysql.miun.se");
     define("DBUSER", "toda2100");
     define("DBPASS", "rKVhwHwMMx");
-    define("DBDATABASE", "toda2100"); */
-
+    define("DBDATABASE", "toda2100"); 
+ */
 }
 
 ?>

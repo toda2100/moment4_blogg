@@ -1,4 +1,9 @@
-<!-- sektionsfil för header för bloggprojekt Tobias Dahlberg 2022 -->
+<?php 
+/*
+* Skapad av: Tobias Dahlberg
+* sektionsfil för header bloggprojekt
+*/
+?>
 
 <!DOCTYPE html>
 <html lang="sv">
