@@ -44,8 +44,9 @@ if (isset($_GET['deleteid'])) {            //vid borttagning av inlägg. Hämta 
         echo "<p class='error'>Fel vid radering</p>";
     }
 }
+?>
 
-
+<?php
 if (isset($_POST['title'])) {                       //hämta från inputfält 
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -108,7 +109,7 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
         <p><a href="edit.php?id=<?= $b['id']; ?>">Ändra inlägg</a></p> <!-- för att komma till editera  -->
         <p><?= substr($b['content'], 0, 150); ?>...</p>
         <p><a href="article.php?id=<?= $b['id']; ?>">Se hela inlägget</a></p>  <!-- för att kunna läsa hela  -->
-        <p><a href="admin.php?deleteid=<?= $b['id']; ?>" onclick="conDel()">Radera inlägg</a></p> <!-- för att radera  -->
+        <p><a href="admin.php?deleteid=<?= $b['id']; ?>" onclick="return ConfirmDelete()">Radera inlägg</a></p> <!-- för att radera  -->
     </article>
 <?php
 }
@@ -116,15 +117,14 @@ foreach ($article_list as $b) {                 //rulla igenom hela array skriv 
 
 <a class="logout" href="logout.php">Logga ut</a>
 
-<script>function conDel(){
-    if(confirm("Är du säker att du vill radera?") === true){
-        return true;
-    }else{
-        return false;
+<script>function ConfirmDelete() {   //kollar om inlägget verkligen ska raders innan det skickas 
+  if (confirm("Radera inlägg?")){
+          return true;
    }
- } </script> 
-
-
+    else {
+       return false; 
+    }
+} </script> 
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

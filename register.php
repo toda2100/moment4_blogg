@@ -20,7 +20,7 @@ if (isset($_POST['username'])) {   //kolla finns något i input
 
     if (!$users->setUsername($username)) {          //funktion i klass för att sätta Titel. 
         $success = false;
-        $message =  "<p class='error'>Ange namn med minst 5 tecken</p>";
+        $message =  "<p class='error'>Ange användarnamn med minst 5 tecken</p>";
     }
 
     if (!$users->setPassword($password)) {           //funktion i klass för att sätta innehållet. 
@@ -30,7 +30,7 @@ if (isset($_POST['username'])) {   //kolla finns något i input
 
     if (!$users->setName($name)) {           //funktion i klass för att sätta innehållet. 
         $success = false;
-        $message =  "<p class='error'>Ange förnamn med minst 5 tecken och inga mellanslag</p>";
+        $message =  "<p class='error'>Ange förnamn med minst 3 tecken och inga mellanslag</p>";
     }
 
     if (!$users->setLastName($lastname)) {           //funktion i klass för att sätta innehållet. 
@@ -45,7 +45,7 @@ if (isset($_POST['username'])) {   //kolla finns något i input
             $message =  "<p class='error'>Fel vid lagring</p>";
         }
     } else {
-        $message2 =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
+        $messagecontroll =  "<p class='error'>Fel vid lagring, kontrollera input</p>";
     }
 }
 ?>
@@ -61,8 +61,8 @@ if (isset($message)) {
     echo $message;
 } 
 
-if (isset($message2)) {
-    echo $message2;
+if (isset($messagecontroll)) {
+    echo $messagecontroll;
 } 
 
 //skriv ut meddelanden ovan vid fel 
@@ -94,7 +94,7 @@ if (isset($message2)) {
 
 </article>
 
-<script src="js/register.js"></script>
+<script src="js/register.js"></script>  
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
