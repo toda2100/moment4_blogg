@@ -59,11 +59,11 @@ if (isset($_POST['username'])) {   //kolla finns något i input
 <?php
 if (isset($message)) {
     echo $message;
-} 
+}
 
 if (isset($messagecontroll)) {
     echo $messagecontroll;
-} 
+}
 
 //skriv ut meddelanden ovan vid fel 
 ?>
@@ -94,7 +94,13 @@ if (isset($messagecontroll)) {
 
 </article>
 
-<script src="js/register.js"></script>  
+<script>
+    let approve = document.getElementById('approve');
+    let submituser = document.getElementById('submituser');
+    approve.onchange = function() {
+        submituser.disabled = !this.checked;
+    };
+</script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>

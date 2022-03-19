@@ -49,7 +49,7 @@ include("includes/header.php"); ?>
         $article = new Article();                       //hämta artiklar. 
         $article_list = $article->getArticles();
 
-        if (count($article_list) < 5) {                 //kolla så listan inte är tom för att visa övriga artiklar 
+        if (count($article_list) < 3) {                 //kolla så listan inte är tom för att visa övriga artiklar 
             echo "<p class='error'>Inga fler artiklar finns att visa.</p>";
         }
 
@@ -77,7 +77,15 @@ include("includes/header.php"); ?>
 
 </section>
 
-<script src="js/main.js"></script>
+<script>document.getElementById("element").style.display = "none";      //hämta via ID för själva div. 
+document.getElementById("all").style.display = "none";
+
+let open = document.getElementById('open');
+open.onclick = function () {                 //funktion körs för att dölja och ta bort knappar vid klick på att visa mer. 
+    document.getElementById('element').style.display = 'block';
+    document.getElementById('open').style.display = "none";
+    document.getElementById('all').style.display = "block";
+}</script>
 
 <?php include("includes/sidebar.php"); ?>
 <?php include("includes/footer.php"); ?>
