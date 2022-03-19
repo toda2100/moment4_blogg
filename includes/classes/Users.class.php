@@ -8,6 +8,7 @@ class Users
     private $username;
     private $password;
     public  $name;
+    public  $lastname;
 
     function __construct()   //construct. 
     {

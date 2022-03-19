@@ -77,7 +77,7 @@ if (isset($messagecontroll)) {
         <label for="password">Lösenord</label><br>
         <input class="area" type="text" name="password" id="password" placeholder="Minst 5 tecken!"><br>
         <label for="firstname">Förnamn</label><br>
-        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 5 tecken, inga mellanslag!"><br>
+        <input class="area" type="text" name="firstname" id="firstname" placeholder="Minst 3 tecken, inga mellanslag!"><br>
         <label for="lastname">Efternamn</label><br>
         <input class="area" type="text" name="lastname" id="lastname" placeholder="Minst 5 tecken, inga mellanslag!"><br>
         <div>

@@ -8,8 +8,7 @@ class Article
     private $db;
     private $title;
     private $content;
-    //private $username;
-
+    
     function __construct()   //construct. 
     {
         $this->db = new mysqli(DBHOST, DBUSER, DBPASS, DBDATABASE);
