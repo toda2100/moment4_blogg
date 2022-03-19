@@ -25,20 +25,23 @@
     ?>
 
     <h2>Våra bloggare</h2>
-   
+
     <?php
 
     $blogger = new Users();        //Utskrift av alla bloggare med länk till deras sidor via unikt namn
     $blogger_list = $blogger->getUsersByName();
 
+    if (count($blogger_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+        echo "<p class='error'>Inga bloggare är registrerade ännu!</p>";
+    }
+
     foreach ($blogger_list as $b) {
     ?>
+    <!-- Skriver ut även indikera vilken bloggares sida besökaren är på -->
+        <ol>
+            <li <?php if ($page_title == $b['name']) echo 'class="current"'; ?>><i class="fas fa-user"></i> <a <?php if ($page_title == $b['name']) echo 'class="current"'; ?> href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name'] . " " . $b['lastname']; ?></a></li>
 
-        <ul>
-
-            <li><a href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name'] . " " . $b['lastname']; ?></a></li>
-
-        </ul>
+        </ol>
     <?php
     }
     ?>

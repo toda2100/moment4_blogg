@@ -3,14 +3,19 @@
 <?php include("includes/config.php"); ?>
 <!-- inkluderar konfiguartionsfil till header/varje sida -->
 
-<?php $page_title = "Blogger" ;          //
+<?php $page_title = $_GET['name'] ;          //
 include("includes/header.php"); ?>
 
 <?php                               //hämta lista via klassfunktion
 $article = new Article();
 $article_list = $article->getArticleByUser('name');
 $name = $_GET['name'];
+
 echo "<h2>Alla artiklar av " . $name . "</h2>";  //namn hämtas för rubrik
+
+if (count($article_list) == 0) {                 //kolla så listan inte är tom. Dvs inga artiklar. 
+    echo "<p class='error'>Bloggaren har inte börjat blogga!</p>";
+}
 
 foreach ($article_list as $a) {             //loopa hela listan för utskrift nedan. Visar 300 tecken, läs mer. 
 ?>
