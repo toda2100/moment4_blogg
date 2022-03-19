@@ -15,7 +15,8 @@
     <meta name="description" content="tbd"> <!-- beskrivning av sidan -->
     <title><?= $site_title . $divider . $page_title; ?></title> <!-- för att kunna hantera sidtitlat på undersidor -->
     <link rel="stylesheet" href="css/main.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>

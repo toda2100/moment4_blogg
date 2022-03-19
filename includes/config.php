@@ -32,12 +32,7 @@ ini_set("display_errors", 1);
     define("DBUSER", "root");    //"root"
     define("DBPASS", "");          // ""
     define("DBDATABASE", "bloggdb");
-/* } else {
-    define("DBHOST", "studentmysql.miun.se");
-    define("DBUSER", "toda2100");
-    define("DBPASS", "rKVhwHwMMx");
-    define("DBDATABASE", "toda2100"); 
- */
+
 }
 
 ?>

@@ -11,9 +11,9 @@
     <h2>Snabblänkar</h2>
     <!-- Sidebar, lista. Tillagd PHP-funktion för att kunna visa vilken sida man är på via CSS -->
     <ol>
-        <li <?php if ($page_title == "Startsida") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Startsida") echo 'class="current"'; ?> href="index.php">Senaste</a></li>
-        <li <?php if ($page_title == "Artiklar") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Artiklar") echo 'class="current"'; ?> href="articles.php">Artiklar</a></li>
-        <li <?php if ($page_title == "Om") echo 'class="current"'; ?>><i class="fas fa-arrow-left"></i> <a <?php if ($page_title == "Om") echo 'class="current"'; ?> href="about.php">Om</a></li>
+        <li <?php if ($page_title == "Startsida") echo 'class="current"'; ?>><i class="fa fa-arrow-left"></i> <a <?php if ($page_title == "Startsida") echo 'class="current"'; ?> href="index.php">Senaste</a></li>
+        <li <?php if ($page_title == "Artiklar") echo 'class="current"'; ?>><i class="fa fa-arrow-left"></i> <a <?php if ($page_title == "Artiklar") echo 'class="current"'; ?> href="articles.php">Artiklar</a></li>
+        <li <?php if ($page_title == "Om") echo 'class="current"'; ?>><i class="fa fa-arrow-left"></i> <a <?php if ($page_title == "Om") echo 'class="current"'; ?> href="about.php">Om</a></li>
     </ol>
 
 
@@ -44,7 +44,7 @@
     ?>
     <!-- Skriver ut även indikera vilken bloggares sida besökaren är på -->
         <ol>
-            <li <?php if ($page_title == $b['name']) echo 'class="current"'; ?>><i class="fas fa-user"></i> <a <?php if ($page_title == $b['name']) echo 'class="current"'; ?> href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name'] . " " . $b['lastname']; ?></a></li>
+            <li <?php if ($page_title == $b['name']) echo 'class="current"'; ?>><i class="fa fa-user"></i> <a <?php if ($page_title == $b['name']) echo 'class="current"'; ?> href="blogger.php?name=<?= $b['name']; ?>"><?= $b['name'] . " " . $b['lastname']; ?></a></li>
 
         </ol>
     <?php
